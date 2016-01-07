@@ -1,0 +1,37 @@
+<%= form_for(@fee_rate) do |f| %>
+  <% if @fee_rate.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fee_rate.errors.count, "error") %> prohibited this fee_rate from being saved:</h2>
+
+      <ul>
+      <% @fee_rate.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :rate_apartment %><br>
+    <%= f.text_field :rate_apartment %>
+  </div>
+  <div class="field">
+    <%= f.label :rate_cost %><br>
+    <%= f.text_field :rate_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :fee_id %><br>
+    <%= f.text_field :fee_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @fee_rate.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @fee_rate.end_date %>
+</p>
+
+<p>
+  <strong>Rate apartment:</strong>
+  <%= @fee_rate.rate_apartment %>
+</p>
+
+<p>
+  <strong>Rate cost:</strong>
+  <%= @fee_rate.rate_cost %>
+</p>
+
+<p>
+  <strong>Fee:</strong>
+  <%= @fee_rate.fee %>
+</p>
+
+<%= link_to 'Edit', edit_fee_rate_path(@fee_rate) %> |
+<%= link_to 'Back', fee_rates_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  payment_interval: 1
+  currency: MyString
+  unit: MyString
+  community_id: 
+
+two:
+  name: MyText
+  payment_interval: 1
+  currency: MyString
+  unit: MyString
+  community_id: 

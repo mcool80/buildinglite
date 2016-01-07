@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Fee Transactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Transaction type</th>
+      <th>Value</th>
+      <th>Fee</th>
+      <th>Apartment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fee_transactions.each do |fee_transaction| %>
+      <tr>
+        <td><%= fee_transaction.start_date %></td>
+        <td><%= fee_transaction.end_date %></td>
+        <td><%= fee_transaction.transaction_type %></td>
+        <td><%= fee_transaction.value %></td>
+        <td><%= fee_transaction.fee %></td>
+        <td><%= fee_transaction.apartment %></td>
+        <td><%= link_to 'Show', fee_transaction %></td>
+        <td><%= link_to 'Edit', edit_fee_transaction_path(fee_transaction) %></td>
+        <td><%= link_to 'Destroy', fee_transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fee transaction', new_fee_transaction_path %>

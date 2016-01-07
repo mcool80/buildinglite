@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2015-11-09
+  end_date: 2015-11-09
+  rate_apartment: 9.99
+  rate_cost: 9.99
+  fee_id: 
+
+two:
+  start_date: 2015-11-09
+  end_date: 2015-11-09
+  rate_apartment: 9.99
+  rate_cost: 9.99
+  fee_id: 

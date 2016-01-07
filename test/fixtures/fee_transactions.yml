@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2015-11-09
+  end_date: 2015-11-09
+  transaction_type: MyString
+  value: 9.99
+  fee_id: 
+  apartment_id: 
+
+two:
+  start_date: 2015-11-09
+  end_date: 2015-11-09
+  transaction_type: MyString
+  value: 9.99
+  fee_id: 
+  apartment_id: 
