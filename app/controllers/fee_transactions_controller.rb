@@ -1,4 +1,5 @@
 class FeeTransactionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_fee_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /fee_transactions

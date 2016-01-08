@@ -1,4 +1,5 @@
 class FeeRatesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_fee_rate, only: [:show, :edit, :update, :destroy]
 
   # GET /fee_rates

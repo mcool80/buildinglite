@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109163545) do
+ActiveRecord::Schema.define(version: 20160108134234) do
 
   create_table "apartments", force: :cascade do |t|
     t.text     "address",      limit: 65535
     t.text     "apartment_no", limit: 65535
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "community_id", limit: 4
   end
+
+  add_index "apartments", ["community_id"], name: "index_apartments_on_community_id", using: :btree
 
   create_table "communities", force: :cascade do |t|
     t.text     "name",        limit: 65535
