@@ -1,0 +1,8 @@
+<h2><%= t(@fee.name) %></h2>
+
+<% for ft_item in @ft %>
+  <%= ft_item.start_date %> <%= ft_item.transaction_type %> <%= ft_item.value %> <% if ft_item.is_currency %><%= @fee.currency %><% else %><%= @fee.unit %><% end %> <br>
+<% end %>
+<p> 
+	Add input <input type="date" name="date"> value: <input type="text" name="value"> <%= @fee.unit %> <input type="button" value="Send">
+</p>

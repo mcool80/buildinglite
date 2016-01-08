@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'fee_page/:id' => 'fee_page#index'
+
+  root 'static#index'
+
   resources :fee_transactions
 
   resources :fee_rates

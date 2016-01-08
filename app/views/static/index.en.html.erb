@@ -1,0 +1,22 @@
+<% if user_signed_in? %>
+<p>
+	Hello <%= current_user.first_name %>!
+</p>
+
+<p>
+	You are currently connected to the community <%= @current_community.name %>
+</p>
+<p>
+	Update current fees:<br>
+	<% for fee_item in @fees %>
+	  <%= link_to fee_item.name, controller: "fee_page", action: "index", id: fee_item %>
+	<% end %>
+
+<% else %> 
+<p>
+	This is the application that makes it easy to maintain a building with a community.
+</p>
+<p>
+	Please <%= link_to t("Sign up"), new_user_registration_path, :class => 'navbar-link'  %> and connect to your community today.
+</p>
+<% end %>
