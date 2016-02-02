@@ -1,9 +1,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  address: MyText
-  apartment_no: MyText
+  id: 1
+  address: Stadsgatan 4
+  apartment_no: 1
+  community_id: 1
+  moved: null
 
 two:
-  address: MyText
+  id: 2
+  address: Stadsgatan 5
+  apartment_no: 2
+  community_id: 1
+  moved: 2015-11-21
+
+three:
+  id: 3
+  address: Åvägen 45
+  apartment_no: 11B
+  community_id: 2
+  moved: 1995-01-12
+
+four:
+  id: 4
+  address: Riddaregatan 543
   apartment_no: MyText
+  community_id: 2 
+  moved: 2013-05-01
+
+five:
+  id: 5
+  address: 
+  apartment_no: 4
+  community_id: 2
+  moved: null
+  

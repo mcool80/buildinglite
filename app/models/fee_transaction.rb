@@ -7,4 +7,5 @@ class FeeTransaction < ActiveRecord::Base
     end
     return true
   end
+
 end

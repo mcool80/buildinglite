@@ -9,8 +9,10 @@
 <body>
   <header>
     <h1>BuildingLite</h1>
+      <p class="navbar-text pull-left">
+        <%= link_to t("Home"), controller: "/static", action: "index" %><br/>
+      </p>
       <p class="navbar-text pull-right">
-      <%= link_to t("Home"), controller: "static", action: "index" %><br/>
       <% if user_signed_in? %>
         Logged in as <strong><%= current_user.email %></strong>.
         <%= link_to t('Edit profile'), edit_user_registration_path, :class => 'navbar-link' %> |
@@ -19,6 +21,7 @@
         <%= link_to t("Sign up"), new_user_registration_path, :class => 'navbar-link'  %> |
         <%= link_to t("Login"), new_user_session_path, :class => 'navbar-link'  %>
       <% end %>
+      </p>
   </header>
   <div id="main">
     <% if notice %>

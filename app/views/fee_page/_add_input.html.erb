@@ -1,0 +1,5 @@
+  <form action="/fee_page/add" method="post">
+        <input type="hidden" name="fee_id" value="<%= @fee.id %>">
+        <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
+	Add input <input type="date" name="start_date" class="form-control"> value: <input type="text" name="value" class="form-control"> <%= @fee.unit %> <input type="submit" value="Save" class="btn btn-default">
+  </form>

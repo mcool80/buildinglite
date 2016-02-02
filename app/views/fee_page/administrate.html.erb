@@ -1,0 +1,8 @@
+<h2><%= t(@fee.name) %></h2>
+
+<% if @fee.fee_type != 0 %>
+<%= link_to t("Add input"), controller: "fee_transactions", action: "new", fee_id: @fee.id, transaction_type: "input", redirect: request.path %></a><br/>
+  <%= link_to t("Calculate debt"), controller: "fee_page", action: "check_fee", id: @fee.id %>
+<% else %>
+  <%= t("Change fees") %>
+<% end %>

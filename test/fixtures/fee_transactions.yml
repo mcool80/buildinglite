@@ -1,17 +1,58 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  start_date: 2015-11-09
-  end_date: 2015-11-09
-  transaction_type: MyString
-  value: 9.99
-  fee_id: 
-  apartment_id: 
+  start_date: 2010-01-01
+  end_date: null
+  transaction_type: input
+  value: 100.2
+  fee_id: 1
+  apartment_id: 1
 
 two:
+  start_date: 2011-01-09
+  end_date: 2011-01-09
+  transaction_type: input
+  value: 200.2
+  fee_id: 1
+  apartment_id: 1
+
+three:
+  start_date: 2011-05-09
+  end_date: null
+  transaction_type: input
+  value: 203.3
+  fee_id: 1
+  apartment_id: 1
+
+four:
   start_date: 2015-11-09
   end_date: 2015-11-09
-  transaction_type: MyString
-  value: 9.99
-  fee_id: 
-  apartment_id: 
+  transaction_type: payment 
+  value: 100
+  fee_id: 2
+  apartment_id: 2
+
+five:
+  start_date: 2014-12-01
+  end_date: 2015-11-09
+  transaction_type: payment
+  value: 75
+  fee_id: 2
+  apartment_id: 2
+
+six:
+  start_date: 2015-11-09
+  end_date: null
+  transaction_type: debt
+  value: 400
+  fee_id: 3
+  apartment_id: 4 
+
+seven:
+  start_date: 2015-11-09
+  end_date: 2015-11-09
+  transaction_type: payment
+  value: 340
+  fee_id: 3
+  apartment_id: 4
+

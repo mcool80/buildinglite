@@ -4,8 +4,52 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+one: 
+  id: 1
+  email: name@testadress.se
+  first_name: Sven
+  last_name: Svensson
+  user_type: user
+  apartment_id: 1
+  phone: 
+  mobile: (+46) 1234 4454
+
+two: 
+  id: 2
+  email: admin@attedera.com
+  first_name: Åke
+  last_name: Jönsson
+  user_type: administrator
+  apartment_id: 1
+  phone: 875 45
+  mobile:
+
+three: 
+  id: 3
+  email: anna@gmail.com
+  first_name: Anna
+  last_name: Åberg
+  user_type: user
+  apartment_id: 2
+  phone: 
+  mobile:
+
+four: 
+  id: 4
+  email: lgh@huset.net
+  first_name:
+  last_name:
+  user_type:
+  apartment_id: 3
+  phone:
+  mobile:
+
+five: 
+  id: 5
+  email: lista@a.se
+  first_name:
+  last_name:
+  user_type: administrator
+  apartment_id: 4
+  phone:
+  mobile:

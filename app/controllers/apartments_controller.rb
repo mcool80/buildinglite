@@ -1,16 +1,23 @@
 class ApartmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_apartment, only: [:show, :edit, :update, :destroy]
+  before_action :set_apartment, only: [:show, :edit, :update, :destroy, :move]
 
   # GET /apartments
   # GET /apartments.json
   def index
-    @apartments = Apartment.all
+    community_id = current_user.community
+    if current_user.is_administrator
+      @apartments = Apartment.where(:community_id => community_id).order(:address)
+    else
+      @apartments = [Apartment.find(current_user.apartment_id)]
+    end
   end
 
   # GET /apartments/1
   # GET /apartments/1.json
   def show
+    community_id = current_user.community
+    @fees = Fee.where(:community_id => community_id)
   end
 
   # GET /apartments/new

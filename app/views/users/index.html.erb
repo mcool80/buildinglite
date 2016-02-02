@@ -1,0 +1,30 @@
+
+<h2><%= t("Users") %></h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= t("First name") %></th>
+      <th><%= t("Last name") %></th>
+      <th><%= t("Email") %></th>
+      <th><%= t("Address") %></th>
+      <th colspan="3"><%= t("Action") %></th>
+    </tr>
+  </thead>
+  <tbody>
+<% @users.each do |user| %>
+    <tr>
+       <td><%= user.first_name %></td>
+       <td><%= user.last_name %></td>
+       <td><%= user.email %></td>
+       <td><%= user.apartment.address %></td>
+       <td><%= link_to 'Show', user%></td>
+        <% if current_user.is_administrator %>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+       </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

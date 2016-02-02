@@ -35,6 +35,9 @@
     <%= f.label :apartment_id %><br>
     <%= f.text_field :apartment_id %>
   </div>
+  <% if @redirect %>
+    <%= hidden_field_tag "redirect", @redirect %>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

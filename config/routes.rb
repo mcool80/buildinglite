@@ -1,15 +1,29 @@
 Rails.application.routes.draw do
-  get 'fee_page/:id' => 'fee_page#index'
-
   root 'static#index'
 
+  # Fee pages
+  get 'fee_page/:id' => 'fee_page#index'
+  post 'fee_page/add' 
+  get 'fee_page/check_fee/:id' => 'fee_page#check_fee' 
+  get 'fee_page/administrate/:id' => 'fee_page#administrate' 
+  post 'fee_page/save_result'
+  
+  # Moves
+  get 'moves' => 'moves#index'
+  get 'moves/:id' => 'moves#index'
+  post 'moves/add_user' => 'moves#add_user'
+
+  # Fees
   resources :fee_transactions
 
   resources :fee_rates
 
   resources :fees
 
-  devise_for :users
+  # Users
+  devise_for :users, controllers: { registrations: "users/registrations" }
+  resources :users
+
   resources :apartments
 
   resources :communities

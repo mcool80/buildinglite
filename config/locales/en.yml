@@ -20,4 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  Home: "Home"
+  Sign up: "Create account"
+  Login: "Login"
+  Logout: "Logout"
+  Edit user: "Edit profile"
+  leave blank: "leave it blank if you don't want to change it"
+  Update: "Update"
+  Current fee: "Current fee"
+  Address: "Address"
+  Movement: "Movement"

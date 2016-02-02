@@ -7,10 +7,48 @@
 	You are currently connected to the community <%= @current_community.name %>
 </p>
 <p>
-	Update current fees:<br>
+	Available services:<br>
 	<% for fee_item in @fees %>
-	  <%= link_to fee_item.name, controller: "fee_page", action: "index", id: fee_item %>
+	<button type="button" class="btn btn-default btn-lg">
+  	  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+ 	  <%= link_to fee_item.name, controller: "fee_page", action: "index", id: fee_item %>
+	</button>
 	<% end %>
+        
+	<button type="button" class="btn btn-default btn-lg">
+  	  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+ 	  <%= link_to t("Apartment information"), controller: "apartments", action: "show", id: current_user.apartment_id %>
+	</button>
+
+	<p>Problem</p>
+
+	<p>Internal document</p>
+	
+	<% if current_user.is_administrator %>
+	<h2><%= t("Administration") %></h2>
+	<p>Make maintanance plan</p>
+	<p>Maintanaince activitys</p>
+	<p>Long term economics</p>
+	<% for fee_item in @fees %>
+	  <button type="button" class="btn btn-default btn-lg">
+  	    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+	    <%= link_to fee_item.name, controller: "fee_page", action: "administrate", id: fee_item %>
+	  </button>
+        <% end %>
+
+	<button type="button" class="btn btn-default btn-lg">
+  	  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+ 	  <%= link_to t("Apartments"), controller: "apartments", action: "index" %>
+	</button>
+	<p><%= link_to t("Users"), controller: "users", action: "index" %></p>
+        <p>
+        <%= form_tag({controller: "moves", action: "index"}, method: "get" ) do %>
+          <%= select_tag(:id, options_from_collection_for_select(@current_community.apartments, :id, :address) ) %>
+          <%= submit_tag(t("Movement")) %>
+        <% end %>
+        </p>
+	<p>Reports</p>
+        <% end %>
 
 <% else %> 
 <p>

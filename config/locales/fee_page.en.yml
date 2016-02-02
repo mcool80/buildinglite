@@ -1,0 +1,15 @@
+en:
+  payment: "Changed payment"
+  input: "Inputed value"  
+  debt: "Debt/credit"
+  Save result: "Save result"
+  Start date: "Start date"
+  End date: "End date"
+  Calculate: "Calculate"
+  Fixed rate: "Fixed rate"
+  Variable rate: "Variable rate"
+  Start input: "Start input"
+  End input: "End input"
+  Payments: "Payments"
+  Calculated: "Calculated"
+
