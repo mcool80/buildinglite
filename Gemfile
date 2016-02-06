@@ -41,13 +41,20 @@ gem 'autoprefixer-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem "rspec-rails", :group => [:test, :development]
+
+group :test do 
+  gem "factory_girl_rails", "~> 4.0"
+  gem "capybara"
+  gem "guard-rspec"
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+#  gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

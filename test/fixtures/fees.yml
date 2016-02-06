@@ -5,7 +5,7 @@ one:
   name: Årsavgift
   fee_type: 0
   currency: kr
-  unit: -
+  unit: 
   community_id: 1
   payment_interval: 
 
@@ -23,7 +23,7 @@ three:
   name: Årsavgift
   fee_type: 0
   currency: kr
-  unit: -
+  unit: "-"
   community_id: 2
   payment_interval: montly
 

@@ -3,6 +3,12 @@ require 'test_helper'
 class ApartmentsControllerTest < ActionController::TestCase
   setup do
     @apartment = apartments(:one)
+    @apartment2 = {
+	address: "Nya vägen 12",
+	apartment_no: "23",
+	community_id: 1,
+	moved: "2011-01-01"
+    }
   end
 
   test "should get index" do
@@ -18,7 +24,7 @@ class ApartmentsControllerTest < ActionController::TestCase
 
   test "should create apartment" do
     assert_difference('Apartment.count') do
-      post :create, apartment: { address: @apartment.address, apartment_no: @apartment.apartment_no }
+      post :create, apartment: @apartment2
     end
 
     assert_redirected_to apartment_path(assigns(:apartment))
@@ -35,7 +41,7 @@ class ApartmentsControllerTest < ActionController::TestCase
   end
 
   test "should update apartment" do
-    patch :update, id: @apartment, apartment: { address: @apartment.address, apartment_no: @apartment.apartment_no }
+    patch :update, id: @apartment, apartment: { address: @apartment.address, apartment_no: @apartment.apartment_no, community_id: @apartment.community_id }
     assert_redirected_to apartment_path(assigns(:apartment))
   end
 

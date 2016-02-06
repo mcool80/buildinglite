@@ -7,6 +7,7 @@
 one: 
   id: 1
   email: name@testadress.se
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   first_name: Sven
   last_name: Svensson
   user_type: user

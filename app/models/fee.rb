@@ -1,5 +1,6 @@
 class Fee < ActiveRecord::Base
   belongs_to :community
+  has_many :fee_transactions, :dependent => :delete_all
 
   def get_sum(start_date, end_date, apartment_id, type)
     payment = FeeTransaction.where(fee_id: self[:id], apartment_id: apartment_id, transaction_type: type).where('start_date <= ?', start_date).order(start_date: :desc).limit(1)

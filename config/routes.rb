@@ -16,8 +16,6 @@ Rails.application.routes.draw do
   # Fees
   resources :fee_transactions
 
-  resources :fee_rates
-
   resources :fees
 
   # Users
