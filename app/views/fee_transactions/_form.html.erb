@@ -13,15 +13,17 @@
 
   <div class="field">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
+    <%= f.text_field :start_date, :data => { :provide => 'datepicker' } %>
   </div>
   <div class="field">
     <%= f.label :end_date %><br>
-    <%= f.date_select :end_date %>
+    <%= f.text_field :end_date, :data => { :provide => 'datepicker' } %>
   </div>
   <div class="field">
     <%= f.label :transaction_type %><br>
-    <%= f.text_field :transaction_type %>
+    <%= f.select :transaction_type do %>
+      <%= options_for_select([[t('input'), 'input'], [t('debt'), 'debt'], [t('payment'), 'payment']]) %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :value %><br>
@@ -29,7 +31,7 @@
   </div>
   <div class="field">
     <%= f.label :fee_id %><br>
-    <%= f.text_field :fee_id %>
+    <%= f.select :fee_id, Fee.where(:community_id => @community.id) %>
   </div>
   <div class="field">
     <%= f.label :apartment_id %><br>

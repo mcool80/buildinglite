@@ -9,9 +9,13 @@ Rails.application.routes.draw do
   post 'fee_page/save_result'
   
   # Moves
-  get 'moves' => 'moves#index'
-  get 'moves/:id' => 'moves#index'
+  get 'moves/select_apartment' => 'moves#select_apartment'
+  post 'moves/change_users' => 'moves#change_users'
   post 'moves/add_user' => 'moves#add_user'
+  post 'moves/add_input' => 'moves#add_input'
+  get 'moves/remove_user/:user_id/:apartment_id' => 'moves#remove_user'
+  get 'moves/update_fees' => 'moves#update_fees'
+  get 'moves/finish' => 'moves#finish'
 
   # Fees
   resources :fee_transactions

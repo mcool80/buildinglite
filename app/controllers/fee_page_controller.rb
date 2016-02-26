@@ -18,15 +18,16 @@ class FeePageController < ApplicationController
         @ft = FeeTransaction.where(fee_id: @fee.id, apartment_id: current_apartment.id).where('start_date >= ?', move_date)
 	@current_payment = FeeTransaction.where(fee_id: @fee.id, apartment_id: current_apartment.id, transaction_type: "payment").order(:start_date).first
         @apartment = current_apartment
+	@fee_transaction = FeeTransaction.new
       else
         # redirect to error page
       end
     end
   end
   def add
-    ft = FeeTransaction.new(apartment_id: current_user.apartment_id, fee_id: params[:fee_id], value: params[:value], start_date: params[:start_date], transaction_type: "input")
+    ft = FeeTransaction.new(fee_transaction_params)
     ft.save
-    redirect_to "/fee_page/" + params[:fee_id]
+    redirect_to "/fee_page/" + params[:fee_transaction][:fee_id]
     
   end
 
@@ -65,4 +66,10 @@ class FeePageController < ApplicationController
       i += 1
     end
   end
+private
+
+  def fee_transaction_params
+    params.require(:fee_transaction).permit(:start_date, :end_date, :transaction_type, :value, :fee_id, :apartment_id)
+  end
+
 end

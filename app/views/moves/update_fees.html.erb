@@ -1,0 +1,33 @@
+<h3><%= @apartment.address %> (<%= @apartment.apartment_no %>)</h3>
+<h3><%= t("Fees") %></h3>
+	<% @fees.each do |f| %>
+         <div id "fee-<%=f.id %>"> 
+		<% if  @fee_transaction.fee_id == f.id %>
+                   <p><%= t("Fee transaction added") %></p>
+                <% end %>
+		<h4><%= f.name %></h4>
+		<%= t('Montly') %> <% (date, value) = f.get_fee_value(DateTime.now, @apartment.id, 'payment') %>
+                <%= value %> (<%= date %>)<br>
+        <div id "fee-<%=f.id %>-form"> 
+	<%= form_for @fee_transaction, url: { :action => "add_input" } do |ft| %>
+		<%= ft.hidden_field :fee_id, :value => f.id %>
+		<%= ft.hidden_field :apartment_id, :value => @apartment.id %>
+		<%= t("Date") %><br>
+		<%= ft.text_field :start_date, data: { provide: "datepicker" } %><br>
+		<%= t("Transaction type") %><br>
+		<%= ft.select :transaction_type do %>
+			<option value="input"><%= t("input") %></option>
+			<option value="debt"><%= t("debt") %></option>
+			<option value="payment"><%= t("payment") %></option>
+		<% end %>
+<br>
+		<%= t("Value") %><br>
+		<%= ft.text_field :value %> <%= f.unit %><br>
+		<%= ft.submit t("Save") %>
+	<% end %>
+	 </div>
+	</div>
+          <% end %>
+
+<%= link_to t("Finish"), action: 'finish' %>
+

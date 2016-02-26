@@ -1,0 +1,9 @@
+<h2><%= t("Select apartment") %></h2>         
+<p> <%= form_tag action: 'change_users' do %>
+            <%= t("Apartment") %>: <%= select_tag(:id, options_from_collection_for_select(@apartments, :id, :address) ) %><br>
+            <%= t("Moved date") %>: <%= text_field_tag :moved, '', :data => { :provide => 'datepicker' } %><br>
+            <%= submit_tag(t("Add movement")) %>
+          <% end %>
+        </p>
+
+

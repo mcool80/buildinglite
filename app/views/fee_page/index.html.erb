@@ -1,6 +1,10 @@
 <h2><%= t(@fee.name) %></h2>
+<div id="fee-information" class="col-md-12 col-xs-12">
 <%= t("Address") %> <%= @apartment.address %><br/>
-<%= t("Current fee") %>: <%= (@current_payment.nil? ? "N/A" : @current_payment.value ) %> <%= @fee.currency %> (<%= t(@fee.payment_interval) %>)<br><br>
+<%= t("Current fee") %>: <%= (@current_payment.nil? ? "N/A" : @current_payment.value ) %> <%= @fee.currency %> (<%= t(@fee.payment_interval) %>)
+</div>
+<div class="row">
+<div id="fee-table" class="col-md-6 col-xs-12">
 <table class="table">
   <thead>
     <tr>
@@ -25,10 +29,12 @@
 <% end %>
 </tbody>
 </table>
-<% if @fee.fee_type != 0  %>
-<p> 
+</div>
+</div>
+<div class="row">
+<div id="fee-input" class="clearfix col-md-6 col-xs-12">
+<% if @fee.fee_type == Fee.fee_type_values[:user_input]  %>
 <%= render('add_input') %>
-</p>
 <% end %>
-<p>
-</p>
+</div>
+</div>

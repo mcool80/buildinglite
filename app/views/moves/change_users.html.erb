@@ -1,0 +1,52 @@
+<h2><%= @apartment.address %> (<%= @apartment.apartment_no %>)</h3>
+<h3><%= t("Existing user") %></h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= t("Email") %></th>
+        <th><%= t("First name") %></th>
+        <th><%= t("Last name") %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @apartment.users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td>
+          <%= link_to t("Remove user"), { action: 'remove_user', :user_id => user.id, :apartment_id => @apartment.id }, data: { confirm: t('Are you sure?') } %>
+        </td>
+      </td>
+    <% end %>
+    </tbody>
+  </table>
+
+<h3><%= t("Add user") %></h3>
+<%= form_tag({controller: "moves", action: "add_user"}, method: "post") do %>
+  <div class="field">
+    Email<br>
+    <%= text_field_tag(:email) %>
+  </div>
+  <div class="field">
+    Password:<br>
+    <%= text_field_tag(:password) %>
+  </div>
+  <div class="field">
+    Password confirmation:<br>
+    <%= text_field_tag(:password_confirmation) %>
+  </div>
+  <div class="field">
+  <%= hidden_field_tag(:apartment_id, @apartment.id) %>
+  <%= submit_tag(t("Create user")) %>
+  </div>
+<% end %>
+<% if @user and  @user.errors.any? %>
+  <% @user.errors.full_messages.each do |message| %>
+     <li><%= message %></li>
+  <% end %>
+<% end %>
+
+<div class="pull-right"><%= link_to t("Update fees"), action: 'update_fees' %></div>
+

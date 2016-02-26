@@ -1,0 +1,8 @@
+<h2>Finish</h2>
+<p><%= t("Movement for apartment finished") %></p>
+<p><%= t("Address") %>: <%= @apartment.address %></p>
+<p><%= t("Moved") %>: <%= @apartment.moved %></p>
+
+<div>
+<%= link_to t("Home"), { :controller => 'static', :action => 'index', :notice => '' } %>
+</div>

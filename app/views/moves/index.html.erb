@@ -24,7 +24,7 @@
 
 <h3><%= t("Add input") %></h3>
 <% current_user.community.fees.each do |fee| %>
-  <% if fee.fee_type == 1 %>
+  <% if fee.fee_type == Fee.fee_type_values[:user_input] %>
     Add <%= fee.name %> input: <input type="text"> <input type="submit" value="Add input">
     
   <% end %>

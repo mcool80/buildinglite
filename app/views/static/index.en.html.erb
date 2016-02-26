@@ -1,60 +1,42 @@
 <% if user_signed_in? %>
-<p>
-	Hello <%= current_user.first_name %>!
-</p>
+  <div id="user-services">
+  <p>
+    You are currently connected to the community <%= @current_community.name %>
+  </p>
+  <h2><%= t("Available services") %></h2>
+  <ul> 
+    <% for fee_item in @fees %>
+      <li><%= link_to fee_item.name, controller: "fee_page", action: "index", id: fee_item %></li>
+    <% end %>
+    <li><%= link_to t("Apartment information"), controller: "apartments", action: "show", id: current_user.apartment_id %></li>
+  </ul>
+  </div>
 
-<p>
-	You are currently connected to the community <%= @current_community.name %>
-</p>
-<p>
-	Available services:<br>
-	<% for fee_item in @fees %>
-	<button type="button" class="btn btn-default btn-lg">
-  	  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
- 	  <%= link_to fee_item.name, controller: "fee_page", action: "index", id: fee_item %>
-	</button>
-	<% end %>
-        
-	<button type="button" class="btn btn-default btn-lg">
-  	  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
- 	  <%= link_to t("Apartment information"), controller: "apartments", action: "show", id: current_user.apartment_id %>
-	</button>
-
-	<p>Problem</p>
-
-	<p>Internal document</p>
-	
-	<% if current_user.is_administrator %>
-	<h2><%= t("Administration") %></h2>
-	<p>Make maintanance plan</p>
-	<p>Maintanaince activitys</p>
-	<p>Long term economics</p>
-	<% for fee_item in @fees %>
-	  <button type="button" class="btn btn-default btn-lg">
-  	    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-	    <%= link_to fee_item.name, controller: "fee_page", action: "administrate", id: fee_item %>
-	  </button>
-        <% end %>
-
-	<button type="button" class="btn btn-default btn-lg">
-  	  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
- 	  <%= link_to t("Apartments"), controller: "apartments", action: "index" %>
-	</button>
-	<p><%= link_to t("Users"), controller: "users", action: "index" %></p>
-        <p>
-        <%= form_tag({controller: "moves", action: "index"}, method: "get" ) do %>
-          <%= select_tag(:id, options_from_collection_for_select(@current_community.apartments, :id, :address) ) %>
-          <%= submit_tag(t("Movement")) %>
-        <% end %>
-        </p>
-	<p>Reports</p>
-        <% end %>
+  
+  <% if current_user.is_administrator %>
+  <div id="administrator-services">
+    <h2><%= t("Administration") %></h2>
+      <div class="col-md-3 col-xs-12">
+      <% for fee_item in @fees %>
+        <li><%= link_to fee_item.name, controller: "fee_page", action: "administrate", id: fee_item %></li>
+      <% end %>
+  
+      <li><%= link_to t("Apartments"), controller: "apartments", action: "index" %></li>
+      <li><%= link_to t("Users"), controller: "users", action: "index" %></li>
+      <li><%= link_to t("Add movement"), controller: "moves", action: "select_apartment" %></li>
+      <li>Make maintanance plan</li>
+      <li>Maintanaince activitys</li>
+      <li>Long term economics</li>
+      <li>Reports</li>
+      </div>
+    <% end %>
+  </div>
 
 <% else %> 
-<p>
-	This is the application that makes it easy to maintain a building with a community.
-</p>
-<p>
-	Please <%= link_to t("Sign up"), new_user_registration_path, :class => 'navbar-link'  %> and connect to your community today.
-</p>
+  <p>
+    This is the application that makes it easy to maintain a building with a community.
+  </p>
+  <p>
+    Please <%= link_to t("Sign up"), new_user_registration_path, :class => 'navbar-link'  %> and connect to your community today.
+  </p>
 <% end %>

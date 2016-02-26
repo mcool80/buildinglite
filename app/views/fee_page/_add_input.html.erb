@@ -1,5 +1,20 @@
-  <form action="/fee_page/add" method="post">
-        <input type="hidden" name="fee_id" value="<%= @fee.id %>">
-        <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
-	Add input <input type="date" name="start_date" class="form-control"> value: <input type="text" name="value" class="form-control"> <%= @fee.unit %> <input type="submit" value="Save" class="btn btn-default">
-  </form>
+  <h3>Add input</h3>
+  <%= form_for @fee_transaction, url: { action: "add" } do |f| %>
+	<%= f.hidden_field :fee_id, :value => @fee.id %>
+	<%= f.hidden_field :apartment_id, :value => @apartment.id %>
+	<%= f.hidden_field :transaction_type, :value => 'input' %>
+        <div class="row">
+          <div class="col-md-5 col-xs-12">
+            <span class="input-header"><%= t("Read date") %></span><br>
+	    <%= f.text_field :start_date, data: { :provide => 'datepicker' }, class: "form-control" %>
+          </div>
+          <div class="col-md-5 col-xs-12">
+            <span class="input-header"><%= t("Input Value") %> (<%= @fee.unit %>)</span><br>
+	    <%= f.text_field :value, class: "form-control" %>
+          </div>
+          <div class="col-md-2 col-xs-12">
+            <br>
+	    <%= f.submit t("Save"), class: "btn btn-default pull-right" %>
+          </div>
+        </div>
+  <% end %>
