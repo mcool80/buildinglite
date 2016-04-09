@@ -31,15 +31,12 @@
   </div>
   <div class="field">
     <%= f.label :fee_id %><br>
-    <%= f.select :fee_id, Fee.where(:community_id => @community.id) %>
+    <%= f.select :fee_id, Fee.where(:community_id => $current_community.id) %>
   </div>
   <div class="field">
     <%= f.label :apartment_id %><br>
     <%= f.text_field :apartment_id %>
   </div>
-  <% if @redirect %>
-    <%= hidden_field_tag "redirect", @redirect %>
-  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

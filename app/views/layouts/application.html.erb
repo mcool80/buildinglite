@@ -7,23 +7,17 @@
   <%= csrf_meta_tags %>
   <script type="text/javascript">
     $(document).ready(function () {
-      $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+      $.fn.datepicker.defaults.format = "<%= t('dateformat') %>";
     });
   </script>
 </head>
 <body>
   <header id="header">
-    <h1>BostadLite</h1>
+    <h1><%= t("BostadLite") %></h1>
       <div id="topmenu" class="">
         <ul>
           <li>
             <%= link_to t("Home"), controller: "/static", action: "index" %>
-          </li>
-          <li>
-            <a href="#">Tjänster</a>
-          </li>
-          <li>
-            <a href="#">Felanmälan</a>
           </li>
           <li id="right-menu" class="pull-right">
          <% if user_signed_in? %>
@@ -37,16 +31,22 @@
         </li>
       </div>
   </header>
-  <div id="main">
+  <div id="main" class="clearfix">
     <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
+      <div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <%= notice %>
+      </div>
     <% end %>
     <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <%= alert %>
+      </div>
     <% end %>
     <%= yield %>
   </div>
-  <footer>
+  <footer class="clearfix">
   </footer>
 
 </body>

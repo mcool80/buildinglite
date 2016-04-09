@@ -24,6 +24,7 @@ gem 'simple_form'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -35,6 +36,8 @@ gem 'autoprefixer-rails'
 
 gem 'bootstrap-datepicker-rails'
 
+# Use pundit for authorization
+gem 'pundit'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -44,12 +47,15 @@ gem 'bootstrap-datepicker-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem "rspec-rails", :group => [:test, :development]
+#gem "rspec-rails", :group => [:test, :development]
 
 group :test do 
-  gem "factory_girl_rails", "~> 4.0"
+#  gem "factory_girl_rails", "~> 4.0"
   gem "capybara"
-  gem "guard-rspec"
+  gem "capybara-webkit"
+#  gem "guard-rspec"
+  gem 'turn', require: false
+  gem 'minitest'  
 end
 
 group :development, :test do

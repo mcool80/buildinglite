@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   # def create
-  #   super
+  #  super
   # end
 
   # GET /resource/edit
@@ -18,9 +18,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+   def update
+     authorize resource
+     super
+   end
 
   # DELETE /resource
   # def destroy
@@ -59,10 +60,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
   private
     def sign_up_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :apartment_id)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
 
     def account_update_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :apartment_id, :current_password)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :apartment_id, :current_password, :phone, :mobile)
     end
 end

@@ -1,14 +1,12 @@
 <p>
-  <strong>Email:</strong>
+  <strong><%= User.human_attribute_name("email") %>:</strong>
   <%= @user.email%>
 </p>
 
 <p>
-  <strong>Name:</strong>
+  <strong><%= t("Name") %>:</strong>
   <%= @user.first_name %> <%= @user.last_name %>
 </p>
 
-<% if current_user.is_administrator %>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<% end %>
-<%= link_to 'Back', user_path %>
+<%= link_to t('Edit'), edit_user_path(@user) %> |
+<%= link_to t('Back'), user_path %>

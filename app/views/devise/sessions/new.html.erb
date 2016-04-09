@@ -2,17 +2,19 @@
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
-    <%= f.input :email, required: false, autofocus: true do %>
+    <%= f.input User.human_attribute_name("email"), required: false, autofocus: true do %>
       <%= f.input_field :email, class: "form-control" %>
     <% end %>
-    <%= f.input :password, required: false do %> 
+    <%= f.input User.human_attribute_name("password"), required: false do %> 
       <%= f.input_field :password, class: "form-control" %>
     <% end %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    <%= f.input :remember_me, class: "form-control", as: :boolean if devise_mapping.rememberable? do  %>
+      <%= f.checkbox t("Remember me") %>
+    <% end %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Log in", class: "btn btn-default" %>
+    <%= f.button :submit, t("Login"), class: "btn btn-default" %>
   </div>
 <% end %>
 

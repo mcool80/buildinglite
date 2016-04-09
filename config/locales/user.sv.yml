@@ -1,0 +1,14 @@
+sv:
+  activerecord:
+    models:
+      user: "Användare"
+    attributes:
+      user:
+        current_password: "Nuvarande lösenord"
+        last_name: "Efternamn"
+        first_name: "Förnamn"
+        phone: "Telefon"
+        mobile: "Mobil"
+        password: "Lösenord"
+        password_confirmation: "Bekräftelse av lösenord"
+        email: "Epost"

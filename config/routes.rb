@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'fee_page/add' 
   get 'fee_page/check_fee/:id' => 'fee_page#check_fee' 
   get 'fee_page/administrate/:id' => 'fee_page#administrate' 
+  get 'fee_page/add_fee_transaction/:id' => 'fee_page#add_fee_transaction' 
   post 'fee_page/save_result'
   
   # Moves
@@ -25,7 +26,10 @@ Rails.application.routes.draw do
   # Users
   devise_for :users, controllers: { registrations: "users/registrations" }
   resources :users
+  post 'users/connect' => 'users#connect'
+  
 
+  get 'apartments/showinfo/:id' => 'apartments#showinfo'
   resources :apartments
 
   resources :communities

@@ -1,0 +1,12 @@
+sv:
+  activerecord:
+    models:
+      fee_transaction:
+        one: "Avgiftstransaktion"
+        other: "Avgiftstransaktioner"
+    attributes:
+      fee_transaction:
+        start_date: "Start datum"
+        end_date: "Slut datum"
+        transaction_type: "Typ av transaktion"
+        value: "Värde"

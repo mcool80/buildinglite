@@ -1,0 +1,35 @@
+  <h3><%= t("Select apartment") %></h3>
+  <%= form_for @apartment, url: { :controller => 'fee_page', :action => 'add_fee_transaction' }, :method => 'get' do |f| %>
+    <%= t("Address") %><br>
+    <%= f.select :id, @apartments.map{ |a| [a.address, a.id] }, {}, { :onchange => "this.form.submit();" } %>
+  <% end %>
+<% if @apartment.id then %>
+<div id="fee-table">
+  <h3>Add input</h3>
+  <%= render 'fee_transactions_table' %>
+  <%= form_for @fee_transaction, remote: true, :html => { :'data-type' => 'json', :multipart => true} do |f| %>
+    <%= f.hidden_field :fee_id, :value => @fee.id %>
+    <%= f.hidden_field :apartment_id, :value => @apartment.id %>
+    <div class="row">
+      <div class="col-xs-12 col-md-2">
+        <%= t("Transaction type") %><br>
+        <%= f.select :transaction_type, options_for_select([[t("input"), "input"], [t("debt"), "debt"], [t("payment"), "payment"]]), class: "form-control"  %>
+      </div>
+      <div class="col-xs-12 col-md-2">
+        <%= t("Date") %>
+        <%= f.text_field :start_date, data: { :provide => 'datepicker' }, class: "form-control", :required => true %>
+      </div>
+      <div class="col-xs-12 col-md-2">
+        <%= t("Value") %>
+        <%= f.text_field :value, class: "form-control", :required => true  %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-md-8">
+        <br>
+        <%= f.submit t("Save"), class: "btn btn-default pull-right" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end %>

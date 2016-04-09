@@ -1,51 +1,44 @@
 class FeePageController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :set_globals
 
   def index
-    if user_signed_in?
-      @fee = Fee.find(params[:id])
-      current_apartment = Apartment.find(current_user.apartment_id)
-      if params[:apartment_id] and current_user.is_administrator
-         current_apartment = Apartment.where(:id => params[:apartment_id], :community_id => current_user.community.id).first
-      end
-      if @fee.community_id == current_apartment.community_id 
-        ap = Apartment.find(current_user.apartment_id)
-        if ap.moved == nil
-          move_date = Date.parse('1900-01-01')
-        else
-          move_date = ap.moved
-        end
-        @ft = FeeTransaction.where(fee_id: @fee.id, apartment_id: current_apartment.id).where('start_date >= ?', move_date)
-	@current_payment = FeeTransaction.where(fee_id: @fee.id, apartment_id: current_apartment.id, transaction_type: "payment").order(:start_date).first
-        @apartment = current_apartment
-	@fee_transaction = FeeTransaction.new
-      else
-        # redirect to error page
-      end
+    @fee = Fee.find(params[:id])
+    authorize @fee
+    if @fee.community_id == $current_apartment.community_id 
+      ap = Apartment.find(current_user.apartment_id)
+      move_date = ap.moved.nil? ? Date.parse('1900-01-01') : ap.moved
+      @fee_transactions = FeeTransaction.where(fee_id: @fee.id, apartment_id: $current_apartment.id).where('start_date >= ?', move_date).order(:start_date).reverse
+      @current_payment = FeeTransaction.where(fee_id: @fee.id, apartment_id: $current_apartment.id, transaction_type: "payment").order(:start_date).first
+      @fee_transaction = FeeTransaction.new
     end
-  end
-  def add
-    ft = FeeTransaction.new(fee_transaction_params)
-    ft.save
-    redirect_to "/fee_page/" + params[:fee_transaction][:fee_id]
-    
   end
 
   def administrate
-    if user_signed_in?
-      @fee = Fee.find(params[:id])
+    @fee = Fee.find(params[:id])
+    authorize @fee
+  end
+
+  def add_fee_transaction
+    @fee = Fee.find(params[:id])
+    authorize @fee
+    @fee_transaction = FeeTransaction.new
+    if params[:apartment] then
+      @apartment = Apartment.find(params[:apartment][:id])
     end
+    @apartments = Apartment.where(:community_id => current_user.community.id).order(:address)
+    if @apartment.nil? then
+      @apartment = @apartments.first
+    end
+    @fee_transactions = FeeTransaction.where(:apartment_id => @apartment.id, :fee_id => @fee.id).order(:start_date).reverse
   end
   
   def check_fee
-    if user_signed_in?
-      community = current_user.community
-      fee_id = params[:id]
-      @fee = Fee.find(fee_id)
-      @apartments = Apartment.where(:community_id => community.id)
-    else
-      # TODO: Redirect?    
-    end
+    fee_id = params[:id]
+    @fee = Fee.find(fee_id)
+    authorize @fee
+
+    community = current_user.community
+    @apartments = Apartment.where(:community_id => community.id)
   end
   
   def save_result

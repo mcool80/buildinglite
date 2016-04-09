@@ -12,25 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label t("Fee") %><br>
     <%= f.text_area :name %>
   </div>
   <div class="field">
-    <%= f.label :payment_interval %><br>
-    <%= f.number_field :payment_interval %>
+    <%= f.label t("Payment interval") %><br>
+    <%= f.select :payment_interval, options_for_select([[t("Monthly"), "monthly"], [t("Yearly"), "yearly"], [t("Quarterly"), "quarterly"]]) %>
   </div>
   <div class="field">
-    <%= f.label :currency %><br>
+    <%= f.label t("Currency") %><br>
     <%= f.text_field :currency %>
   </div>
   <div class="field">
-    <%= f.label :unit %><br>
+    <%= f.label t("Unit") %><br>
     <%= f.text_field :unit %>
   </div>
-  <div class="field">
-    <%= f.label :community_id %><br>
-    <%= f.text_field :community_id %>
-  </div>
+    <%= f.hidden_field :community_id, :value => $current_community.id %>
   <div class="actions">
     <%= f.submit %>
   </div>

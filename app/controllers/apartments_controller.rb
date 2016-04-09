@@ -1,38 +1,44 @@
 class ApartmentsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_apartment, only: [:show, :edit, :update, :destroy, :move]
+  before_action :authenticate_user!, :set_globals
+  before_action :set_apartment, :only => [:show, :showinfo, :edit, :destroy, :update]
 
   # GET /apartments
   # GET /apartments.json
   def index
-    community_id = current_user.community
-    if current_user.is_administrator
-      @apartments = Apartment.where(:community_id => community_id).order(:address)
-    else
-      @apartments = [Apartment.find(current_user.apartment_id)]
-    end
+    authorize Apartment
+    @apartments = Apartment.where(:community_id => $current_community.id).order(:address)
   end
 
   # GET /apartments/1
   # GET /apartments/1.json
   def show
-    community_id = current_user.community
-    @fees = Fee.where(:community_id => community_id)
+    authorize @apartment
+    @fees = Fee.where(:community_id => $current_community.id)
+  end
+
+  # GET /apartments/1
+  # GET /apartments/1.json
+  def showinfo
+    authorize @apartment
+    @fees = Fee.where(:community_id => $current_community.id)
   end
 
   # GET /apartments/new
   def new
+    authorize Apartment
     @apartment = Apartment.new
   end
 
   # GET /apartments/1/edit
   def edit
+    authorize @apartment
   end
 
   # POST /apartments
   # POST /apartments.json
   def create
     @apartment = Apartment.new(apartment_params)
+    authorize @apartment
 
     respond_to do |format|
       if @apartment.save
@@ -48,6 +54,7 @@ class ApartmentsController < ApplicationController
   # PATCH/PUT /apartments/1
   # PATCH/PUT /apartments/1.json
   def update
+    authorize @apartment
     respond_to do |format|
       if @apartment.update(apartment_params)
         format.html { redirect_to @apartment, notice: 'Apartment was successfully updated.' }
@@ -62,6 +69,7 @@ class ApartmentsController < ApplicationController
   # DELETE /apartments/1
   # DELETE /apartments/1.json
   def destroy
+    authorize @apartment
     @apartment.destroy
     respond_to do |format|
       format.html { redirect_to apartments_url, notice: 'Apartment was successfully destroyed.' }
@@ -70,9 +78,8 @@ class ApartmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_apartment
-      @apartment = Apartment.find(params[:id])
+      @apartment = $current_apartment
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

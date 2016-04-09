@@ -1,0 +1,13 @@
+sv:
+  payment: "Ny avgift"
+  input: "Inmatat värde"  
+  debt: "Skuld/åter"
+  Save result: "Spara resultat"
+  Calculate: "Beräkna"
+  Fixed rate: "Fast kostnad"
+  Variable rate: "Förbrukningskostnad"
+  Calculated: "Beräknat"
+  Add input: "Lägg till värde"
+  Date: "Datum"
+  Input deleted: "Värde borttaget"
+

@@ -1,9 +1,8 @@
 class StaticController < ApplicationController
+  before_action :set_globals
+
   def index
-    if user_signed_in?
-	current_apartment = Apartment.find(current_user.apartment_id)
-	@fees = Fee.where(community_id: current_apartment.community_id)
-	@current_community = Community.find(current_apartment.community_id)
-    end
+    skip_authorization
+    @fees = Fee.where(community_id: $current_community.id)
   end
 end

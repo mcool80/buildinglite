@@ -1,0 +1,61 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+sv:
+  BostadLite: "BostadLite"
+  Home: "Hem"
+  Sign up: "Skapa konto"
+  Login: "Logga in"
+  Logout: "Logga ut"
+  Edit user: "Ändra profil"
+  Forgot your password?: "Glömt lösenord?"
+  Remember me: "Kom ihåg mig"
+  leave blank: "lämna blank om du inte vill ändra det"
+  Update: "Uppdatera"
+  Current fee: "Nuvarande avgift"
+  Address: "Adress"
+  Add movement: "Skapa flytt"
+  Administration: "Administration"
+  Available services: "Tillgängliga tjänster"
+  Are you sure?: "Är du säker?"
+  Save: "Spara"
+  Create: "Skapa"
+  dateformat: "yyyy-mm-dd"
+  Reset password: "Återställ lösenord"
+  Edit profile: "Ändra profil"
+  Current password: "Nuvarande lösenord"
+  Need current password: "Ditt nuvarande lösenord behövs för att kunna ändra"
+  Cancel my account: "Avsluta mitt konto"
+  Currently waiting confirmation for: "Väntar på bekräftelse från"
+  Back: "Tillbaka"
+  Apartment information: "Lägenhetsinformation"
+  Apartment no: "Lägenhetsnummer"
+  You are not authorized to perform this action: "Du har inte behörighet att se sidan."
+  yearly: "Årsvis"
+  monthly: "Månadsvis"
+  quarterly: "Kvartalsvis"
+  Payment interval: "Betalningsintervall"
+  Edit: "Redigera"
+  Show: "Visa"
+  Destroy: "Ta bort"
+  New Apartment: "Lägg till lägenhet"
+  Action: "Hantera"
+  Name: "Namn"

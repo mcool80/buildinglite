@@ -5,7 +5,7 @@ one:
   address: Stadsgatan 4
   apartment_no: 1
   community_id: 1
-  moved: null
+  moved: 2011-01-01
 
 two:
   id: 2

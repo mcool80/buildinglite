@@ -1,40 +1,18 @@
 <h2><%= t(@fee.name) %></h2>
 <div id="fee-information" class="col-md-12 col-xs-12">
-<%= t("Address") %> <%= @apartment.address %><br/>
-<%= t("Current fee") %>: <%= (@current_payment.nil? ? "N/A" : @current_payment.value ) %> <%= @fee.currency %> (<%= t(@fee.payment_interval) %>)
+  <%= Apartment.human_attribute_name("Address") %> <%= $current_apartment.address %><br/>
+  <%= t("Current") %> <%= Fee.model_name.human %>: <%= (@current_payment.nil? ? "N/A" : @current_payment.value ) %> 
+  <%= @fee.currency %> (<%= t(@fee.payment_interval) %>)
 </div>
 <div class="row">
-<div id="fee-table" class="col-md-6 col-xs-12">
-<table class="table">
-  <thead>
-    <tr>
-      <th><%= t("Date") %></th>
-      <th><%= t("Transaction type") %></th>
-      <th><%= t("Value") %></th>
-      <th><%= t("Action") %></th>
-    </tr>
-  </thead>
-  <tbody>
-<% for ft_item in @ft.order(:start_date).reverse %>
-    <tr>
-      <td><%= ft_item.start_date %></td>
-      <td><%= t(ft_item.transaction_type) %></td>
-      <td><%= ft_item.value %> <% if ft_item.is_currency %><%= @fee.currency %><% else %><%= @fee.unit %><% end %></td>
-      <td>
-        <% if ft_item.transaction_type == "input" %>
-          <%= link_to 'Destroy', ft_item, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => '' %> 
-        <% end %>
-      </td>
-    </tr>
-<% end %>
-</tbody>
-</table>
-</div>
+  <div id="fee-table" class="col-md-6 col-xs-12">
+    <%= render('fee_transactions_table') %>
+  </div>
 </div>
 <div class="row">
-<div id="fee-input" class="clearfix col-md-6 col-xs-12">
-<% if @fee.fee_type == Fee.fee_type_values[:user_input]  %>
-<%= render('add_input') %>
-<% end %>
-</div>
+  <div id="fee-input" class="clearfix col-md-6 col-xs-12">
+    <% if @fee.fee_type == Fee.fee_type_values[:user_input]  %>
+      <%= render('add_input') %>
+    <% end %>
+  </div>
 </div>

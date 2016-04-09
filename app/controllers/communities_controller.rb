@@ -5,27 +5,32 @@ class CommunitiesController < ApplicationController
   # GET /communities
   # GET /communities.json
   def index
+    authorize Community
     @communities = Community.all
   end
 
   # GET /communities/1
   # GET /communities/1.json
   def show
+    authorize @community 
   end
 
   # GET /communities/new
   def new
     @community = Community.new
+    authorize @community 
   end
 
   # GET /communities/1/edit
   def edit
+    authorize @community 
   end
 
   # POST /communities
   # POST /communities.json
   def create
     @community = Community.new(community_params)
+    authorize @community 
 
     respond_to do |format|
       if @community.save
@@ -41,6 +46,7 @@ class CommunitiesController < ApplicationController
   # PATCH/PUT /communities/1
   # PATCH/PUT /communities/1.json
   def update
+    authorize @community 
     respond_to do |format|
       if @community.update(community_params)
         format.html { redirect_to @community, notice: 'Community was successfully updated.' }
@@ -55,6 +61,7 @@ class CommunitiesController < ApplicationController
   # DELETE /communities/1
   # DELETE /communities/1.json
   def destroy
+    authorize @community 
     @community.destroy
     respond_to do |format|
       format.html { redirect_to communities_url, notice: 'Community was successfully destroyed.' }

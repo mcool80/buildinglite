@@ -1,5 +1,5 @@
 class MovesController < ApplicationController
-  before_action :authenticate_user!, :security_check, :setup_wizard
+  before_action :authenticate_user!, :setup_wizard
 
   def update_fees
     @fees = Fee.where(:community_id => current_user.community.id)
@@ -7,48 +7,52 @@ class MovesController < ApplicationController
   end
 
   def select_apartment
+    authorize Apartment
     @apartments = current_user.community.apartments.order(:address)
     @apartment = Apartment.new
   end
   
   def change_users
+    @user = User.new
+    apartment = Apartment.find(params[:id])
+    authorize apartment
     session[:moved] = params[:moved]
     session[:apartment_id] = params[:id]
   end
 
-  def add_user
-    @user = User.new(user_params)
-    if ! @user.valid?
-      flash[:alert] = t('User was NOT successfully created.')
-    else
-      if @user.save!
-        flash[:notice] = t('User was successfully created.') 
-      end
-    end
-    render 'change_users'
-  end
+#  def add_user
+#    @user = User.new(user_params)
+#    if ! @user.valid?
+#      flash[:alert] = t('User was NOT successfully created.')
+#    else
+#      if @user.save!
+#        flash[:notice] = t('User was successfully created.') 
+#      end
+#    end
+#    render 'change_users'
+#  end
+#
+#  def remove_user
+#    @user = User.find(params[:user_id])
+#    @user.apartment_id = nil
+#    if @user.save!
+#      flash[:notice] = t('User was successfully removed.') 
+#    else
+#      flash[:notice] = t('User was NOT successfully removed.') 
+#    end
+#    render 'change_users'
+#  end
 
-  def remove_user
-    @user = User.find(params[:user_id])
-    @user.apartment_id = nil
-    if @user.save!
-      flash[:notice] = t('User was successfully removed.') 
-    else
-      flash[:notice] = t('User was NOT successfully removed.') 
-    end
-    render 'change_users'
-  end
-
-  def add_input
-    @fees = Fee.where(:community_id => current_user.community.id)
-    @fee_transaction = FeeTransaction.new(fee_transaction_params)
-    if !@fee_transaction.save
-       flash[:notice] = t("Input cannot be saved")
-    else
-       flash[:notice] = t("Input has been saved")
-    end
-    render 'update_fees'
-  end
+#  def add_input
+#    @fees = Fee.where(:community_id => current_user.community.id)
+#    @fee_transaction = FeeTransaction.new(fee_transaction_params)
+#    if !@fee_transaction.save
+#       flash[:notice] = t("Input cannot be saved")
+#    else
+#       flash[:notice] = t("Input has been saved")
+#    end
+#    render 'update_fees'
+#  end
 
   def finish
     if session.has_key?(:moved) then
@@ -70,17 +74,17 @@ class MovesController < ApplicationController
       end
     end
 
-    def security_check
-      if ! current_user.is_administrator
-        redirect_to "/"
-      end 
-    end
+#    def security_check
+#      if ! current_user.is_administrator
+#        redirect_to "/"
+#      end 
+#    end
    
-    def user_params
-      params.permit(:email, :apartment_id, :password, :password_confirmation)
-    end
-
-    def fee_transaction_params
-      params.permit(:apartment_id, :date, :transaction_type, :value)
-    end
+#    def user_params
+#      params.permit(:email, :apartment_id, :password, :password_confirmation)
+#    end
+#
+#    def fee_transaction_params
+#      params.permit(:apartment_id, :date, :transaction_type, :value)
+#    end
 end

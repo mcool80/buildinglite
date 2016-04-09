@@ -1,0 +1,11 @@
+sv:
+  activerecord:
+    models:
+      apartment:
+        one: "Lägenhet"
+        other: "Lägenheter"
+    attributes:
+      apartment:
+        apartment no: "Lägenhetsnummer"
+        address: "Adress"
+        moved: "Inflyttad"

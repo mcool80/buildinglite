@@ -18,6 +18,7 @@ one:
 two: 
   id: 2
   email: admin@attedera.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   first_name: Åke
   last_name: Jönsson
   user_type: administrator
@@ -28,19 +29,21 @@ two:
 three: 
   id: 3
   email: anna@gmail.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   first_name: Anna
   last_name: Åberg
   user_type: user
-  apartment_id: 2
+  apartment_id: 
   phone: 
   mobile:
 
 four: 
   id: 4
   email: lgh@huset.net
-  first_name:
-  last_name:
-  user_type:
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  first_name: Uppsan
+  last_name: 
+  user_type: user
   apartment_id: 3
   phone:
   mobile:
@@ -48,6 +51,7 @@ four:
 five: 
   id: 5
   email: lista@a.se
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
   first_name:
   last_name:
   user_type: administrator

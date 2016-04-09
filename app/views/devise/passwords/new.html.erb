@@ -4,11 +4,13 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+    <%= f.input t("Email"), required: true, autofocus: true do %>
+      <%= f.input_field :email, class: "form-control" %>
+    <% end %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
+    <%= f.button :submit, t("Reset password"), class: "btn btn-default" %>
   </div>
 <% end %>
 

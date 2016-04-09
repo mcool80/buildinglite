@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= Apartment.human_attribute_name("address") %>:</strong>
+  <%= @apartment.address %>
+</p>
+
+<p>
+  <strong><%= Apartment.human_attribute_name("apartment no") %>:</strong>
+  <%= @apartment.apartment_no %>
+</p>
+
+<p>
+  <strong><%= Apartment.human_attribute_name("moved") %>:</strong>
+  <%= @apartment.moved %>
+</p>
+
+<% for fee_item in @fees %>
+    <p><%= link_to fee_item.name, controller: "fee_page", action: "index", id: fee_item, apartment_id: @apartment.id %></p>
+<% end %>
+
+
+<%= link_to t('Back'), { :action => 'index', :controller => 'static' } %>

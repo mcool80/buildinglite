@@ -1,20 +1,22 @@
-  <h3>Add input</h3>
-  <%= form_for @fee_transaction, url: { action: "add" } do |f| %>
-	<%= f.hidden_field :fee_id, :value => @fee.id %>
-	<%= f.hidden_field :apartment_id, :value => @apartment.id %>
-	<%= f.hidden_field :transaction_type, :value => 'input' %>
-        <div class="row">
-          <div class="col-md-5 col-xs-12">
-            <span class="input-header"><%= t("Read date") %></span><br>
-	    <%= f.text_field :start_date, data: { :provide => 'datepicker' }, class: "form-control" %>
-          </div>
-          <div class="col-md-5 col-xs-12">
-            <span class="input-header"><%= t("Input Value") %> (<%= @fee.unit %>)</span><br>
-	    <%= f.text_field :value, class: "form-control" %>
-          </div>
-          <div class="col-md-2 col-xs-12">
-            <br>
-	    <%= f.submit t("Save"), class: "btn btn-default pull-right" %>
-          </div>
-        </div>
+<div id="add-input">
+  <h3><%= t("Add input") %></h3>
+  <%= form_for @fee_transaction, remote: true, :html => { :'data-type' => 'json', :multipart => true} do |f| %>
+    <%= f.hidden_field :fee_id, :value => @fee.id %>
+    <%= f.hidden_field :apartment_id, :value => $current_apartment.id %>
+    <%= f.hidden_field :transaction_type, :value => 'input' %>
+    <div class="row">
+      <div class="col-md-5 col-xs-12">
+        <span class="input-header"><%= t("Date") %></span><br>
+        <%= f.text_field :start_date, data: { :provide => 'datepicker' }, class: "form-control", :required => true %>
+      </div>
+      <div class="col-md-5 col-xs-12">
+        <span class="input-header"><%= t("input") %> (<%= @fee.unit %>)</span><br>
+        <%= f.text_field :value, class: "form-control", :required => true  %>
+      </div>
+      <div class="col-md-2 col-xs-12">
+        <br>
+        <%= f.submit t("Save"), class: "btn btn-default pull-right" %>
+      </div>
+    </div>
   <% end %>
+</div>

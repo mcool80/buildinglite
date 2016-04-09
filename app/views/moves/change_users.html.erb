@@ -15,8 +15,10 @@
         <td><%= user.email %></td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
-        <td>
-          <%= link_to t("Remove user"), { action: 'remove_user', :user_id => user.id, :apartment_id => @apartment.id }, data: { confirm: t('Are you sure?') } %>
+        <td><%= form_for user, method: :put, :remote => true do |f| %>
+          <%= f.hidden_field :apartment_id, :value => nil %>
+          <%= f.submit t("Unconnect user"), data: { confirm: t("Are you sure?") } %>
+           <% end %>
         </td>
       </td>
     <% end %>
@@ -24,22 +26,22 @@
   </table>
 
 <h3><%= t("Add user") %></h3>
-<%= form_tag({controller: "moves", action: "add_user"}, method: "post") do %>
+<%= form_for @user, method: "post", :remote => true do |f| %>
   <div class="field">
     Email<br>
-    <%= text_field_tag(:email) %>
+    <%= f.text_field(:email) %>
   </div>
   <div class="field">
     Password:<br>
-    <%= text_field_tag(:password) %>
+    <%= f.text_field(:password) %>
   </div>
   <div class="field">
     Password confirmation:<br>
-    <%= text_field_tag(:password_confirmation) %>
+    <%= f.text_field(:password_confirmation) %>
   </div>
   <div class="field">
-  <%= hidden_field_tag(:apartment_id, @apartment.id) %>
-  <%= submit_tag(t("Create user")) %>
+  <%= f.hidden_field :apartment_id, value: @apartment.id %>
+  <%= f.submit(t("Create user")) %>
   </div>
 <% end %>
 <% if @user and  @user.errors.any? %>

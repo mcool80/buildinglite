@@ -19,8 +19,8 @@ two:
 three:
   start_date: 2011-05-09
   end_date: null
-  transaction_type: input
-  value: 203.3
+  transaction_type: payment
+  value: 100
   fee_id: 1
   apartment_id: 1
 
@@ -33,26 +33,65 @@ four:
   apartment_id: 2
 
 five:
-  start_date: 2014-12-01
+  start_date: 2011-08-01
   end_date: 2015-11-09
   transaction_type: payment
-  value: 75
-  fee_id: 2
-  apartment_id: 2
+  value: 200
+  fee_id: 1
+  apartment_id: 1
 
 six:
-  start_date: 2015-11-09
+  start_date: <%= DateTime.new(2015,10,9) %>
   end_date: null
-  transaction_type: debt
-  value: 400
-  fee_id: 3
-  apartment_id: 4 
+  transaction_type: input
+  value: 980
+  fee_id: 2
+  apartment_id: 1 
 
 seven:
   start_date: 2015-11-09
   end_date: 2015-11-09
   transaction_type: payment
   value: 340
-  fee_id: 3
-  apartment_id: 4
+  fee_id: 2
+  apartment_id: 1
 
+eight:
+  start_date: 2015-12-09
+  end_date: 
+  transaction_type: input
+  value: 1020
+  fee_id: 2
+  apartment_id: 1
+ 
+nine:
+  start_date: 2016-01-16
+  end_date: 
+  transaction_type: input
+  value: 1203
+  fee_id: 2
+  apartment_id: 1
+
+ten:
+  start_date: 2016-05-01
+  end_date: 
+  transaction_type: input
+  value: 2000
+  fee_id: 2
+  apartment_id: 2
+
+eleven:
+  start_date: 2016-05-31
+  end_date: 
+  transaction_type: payment
+  value: 100
+  fee_id: 2
+  apartment_id: 2
+
+twelve:
+  start_date: 2016-06-01
+  end_date: 
+  transaction_type: debt 
+  value: 200
+  fee_id: 2
+  apartment_id: 2

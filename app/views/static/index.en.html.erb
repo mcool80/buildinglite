@@ -1,19 +1,22 @@
 <% if user_signed_in? %>
   <div id="user-services">
   <p>
-    You are currently connected to the community <%= @current_community.name %>
+    Welcome <%= @current_user.first_name %>!
+  <p>
+    You are currently connected to apartment at address <%= $current_apartment.address %> in the community <%= $current_community.name %>
   </p>
   <h2><%= t("Available services") %></h2>
   <ul> 
     <% for fee_item in @fees %>
       <li><%= link_to fee_item.name, controller: "fee_page", action: "index", id: fee_item %></li>
     <% end %>
-    <li><%= link_to t("Apartment information"), controller: "apartments", action: "show", id: current_user.apartment_id %></li>
+    <li><%= link_to t("Apartment information"), controller: "apartments", action: "showinfo", id: current_user.apartment_id %></li>
+    <li><%= link_to t('Edit profile'), edit_user_registration_path %> </li>
   </ul>
   </div>
 
   
-  <% if current_user.is_administrator %>
+  <% if current_user.admin? %>
   <div id="administrator-services">
     <h2><%= t("Administration") %></h2>
       <div class="col-md-3 col-xs-12">
