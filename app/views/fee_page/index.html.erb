@@ -1,7 +1,7 @@
 <h2><%= t(@fee.name) %></h2>
 <div id="fee-information" class="col-md-12 col-xs-12">
-  <%= Apartment.human_attribute_name("Address") %> <%= $current_apartment.address %><br/>
-  <%= t("Current") %> <%= Fee.model_name.human %>: <%= (@current_payment.nil? ? "N/A" : @current_payment.value ) %> 
+  <%= Apartment.human_attribute_name("address") %> <%= $current_apartment.address %><br/>
+  <%= t("Current fee") %>: <%= (@current_payment.nil? ? "N/A" : @current_payment.value ) %> 
   <%= @fee.currency %> (<%= t(@fee.payment_interval) %>)
 </div>
 <div class="row">
