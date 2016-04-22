@@ -45,4 +45,8 @@ class FeePolicy < ApplicationPolicy
   def add_fee_transaction?
     user.admin?(:community => record.community)
   end
+
+  def check_fee?
+    user.admin?(:community => record.community)
+  end
 end

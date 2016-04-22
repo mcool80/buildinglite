@@ -31,7 +31,7 @@ class FeeTransactionPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin?(:apartment => record.apartment) or (user.apartment == record.apartment and record.transaction_type == 'input' )
+    user.admin?(:apartment => record.apartment) or (user.apartment == record.apartment and record.transaction_type == 'input' and record.created_at > 1.month.ago  )
   end
 
   def edit?

@@ -20,6 +20,9 @@ gem 'devise'
 # Use Simple form
 gem 'simple_form'
 
+# Use Actionmailer
+gem 'actionmailer'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
