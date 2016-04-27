@@ -24,6 +24,7 @@ en:
   Home: "Home"
   Sign up: "Create account"
   Login: "Login"
+  Log in: "Log in"
   Logout: "Logout"
   Edit user: "Edit profile"
   Forgot your password?: "Forgot your password?"
@@ -65,5 +66,4 @@ en:
   Confirm your new password: "Confirm your new password"
   Change my password: "Change my password"
   Password confirmation: "Password confirmation"
-  Sign up: "Sign up"
   Forgot your password?: "Forgot your password?"

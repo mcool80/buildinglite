@@ -8,7 +8,7 @@ class FeePageController < ApplicationController
       ap = Apartment.find(current_user.apartment_id)
       move_date = ap.moved.nil? ? Date.parse('1900-01-01') : ap.moved
       @fee_transactions = FeeTransaction.where(fee_id: @fee.id, apartment_id: $current_apartment.id).where('start_date >= ?', move_date).order(:start_date).reverse
-      @current_payment = FeeTransaction.where(fee_id: @fee.id, apartment_id: $current_apartment.id, transaction_type: "payment").order(:start_date).first
+      @current_payment = FeeTransaction.where(fee_id: @fee.id, apartment_id: $current_apartment.id, transaction_type: "payment").order(:start_date).last
       @fee_transaction = FeeTransaction.new
     end
   end

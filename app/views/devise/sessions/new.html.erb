@@ -1,4 +1,4 @@
-<h2>Log in</h2>
+<h2><%= t("Log in") %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
@@ -8,8 +8,8 @@
     <%= f.input User.human_attribute_name("password"), required: false do %> 
       <%= f.input_field :password, class: "form-control" %>
     <% end %>
-    <%= f.input :remember_me, class: "form-control", as: :boolean if devise_mapping.rememberable? do  %>
-      <%= f.checkbox t("Remember me") %>
+    <%= f.input :remember_me, label: t("Remember me"), class: "form-control", as: :boolean if devise_mapping.rememberable? do  %>
+      <%= f.checkbox :remember_me %>
     <% end %>
   </div>
 

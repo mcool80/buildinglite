@@ -24,6 +24,7 @@ sv:
   Home: "Hem"
   Sign up: "Skapa konto"
   Login: "Logga in"
+  Log in: "Logga in"
   Logout: "Logga ut"
   Edit user: "Ändra profil"
   Forgot your password?: "Glömt lösenord?"
@@ -65,5 +66,4 @@ sv:
   Confirm your new password: "Bekräfta ditt lösenord"
   Change my password: "Ändra mitt lösenord"
   Password confirmation: "Bekräfta lösenord"
-  Sign up: "Skapa konto"
   Forgot your password?: "Glömt ditt lösenord?"
