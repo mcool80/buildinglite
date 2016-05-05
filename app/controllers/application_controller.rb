@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
         if params[:apartment_id] and current_user.admin? and not current_user.community.nil?
            $current_apartment = Apartment.where(:id => params[:apartment_id], :community_id => current_user.community.id).first
         end
-        if not $current_apartment.community.nil? then
+        if not $current_apartment.nil? and not $current_apartment.community.nil? then
           $current_community = Community.find($current_apartment.community_id)
         end
       end
