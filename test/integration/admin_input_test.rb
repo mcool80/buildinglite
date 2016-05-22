@@ -4,6 +4,8 @@ class AdminInputTest < ActionDispatch::IntegrationTest
   setup do
     Capybara.default_driver = :webkit
     visit '/users/sign_in?locale=en'
+    click_link 'Logout' if page.has_link?('Logout')
+    visit '/users/sign_in?locale=en'
     within '#new_user' do
       fill_in 'user_email', :with => 'admin@attedera.com'
       fill_in 'user_password', :with => 'password'
@@ -45,7 +47,7 @@ class AdminInputTest < ActionDispatch::IntegrationTest
     # select apartment
     # add input to apartment
     # check input has added
-
+    assert false, "Not implemented"
   end
   
   test "change payment for apartment" do

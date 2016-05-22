@@ -4,6 +4,8 @@ class UserInputTest < ActionDispatch::IntegrationTest
   setup do
     Capybara.default_driver = :webkit
     visit '/users/sign_in?locale=en'
+    click_link 'Logout' if page.has_link?('Logout')
+    visit '/users/sign_in?locale=en'
     within '#new_user' do
       fill_in 'user_email', :with => 'name@testadress.se'
       fill_in 'user_password', :with => 'password'
@@ -11,20 +13,6 @@ class UserInputTest < ActionDispatch::IntegrationTest
     end
 
     @fee_transaction = fee_transactions(:six)
-  end
-
-  def wait_for_ajax
-    Timeout.timeout(Capybara.default_max_wait_time) do
-      loop until finished_all_ajax_requests?
-    end
-  end
-  def finished_all_ajax_requests?
-    page.evaluate_script('jQuery.active').zero?
-  end
-
-  def teardown
-    Capybara.reset_sessions!
-    Capybara.use_default_driver
   end
 
   # test "the truth" do
