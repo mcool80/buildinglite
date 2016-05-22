@@ -79,7 +79,12 @@ class ApartmentsController < ApplicationController
 
   private
     def set_apartment
-      @apartment = $current_apartment
+      if params[:id]  then
+        @apartment = Apartment.find(params[:id])
+      else
+        @apartment = $current_apartment
+      end
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
