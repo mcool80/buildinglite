@@ -1,0 +1,47 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Assignment.human_attribute_name("no") %></th>
+      <th><%= Assignment.human_attribute_name("reference") %></th>
+      <th><%= Assignment.human_attribute_name("text") %></th>
+      <th><%= Assignment.human_attribute_name("status") %></th>
+      <th><%= Assignment.human_attribute_name("duedate") %></th>
+      <th><%= Assignment.human_attribute_name("user") %></th>
+      <th><%= Assignment.human_attribute_name("close_date") %></th>
+      <th><%= Assignment.human_attribute_name("comment") %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.order('assignment_statuses.order_key').each do |assignment| %>
+      <tr>
+        <td><%= link_to assignment.no, assignment_path(assignment) %></td>
+        <td><%= assignment.reference %></td>
+        <td><%= link_to assignment.text, assignment_path(assignment) %></td>
+        <td>
+<%= form_for assignment, :remote => true, :authenticity_token => true, :html => { :'data-type' => 'json', :multipart => true}  do |f| %>
+  <%= f.hidden_field :community_id, value: $current_community.id %>
+    <%= f.select :assignment_status_id, AssignmentStatus.where(:community_id => $current_community.id).collect { |as| [ as.status, as.id ] }, {}, :onchange => 'javascript:  $(this.form).submit();' %>
+    <% end %>
+        </td>
+        <td>
+<%= form_for assignment, :remote => true, :authenticity_token => true, :html => { :'data-type' => 'json', :multipart => true}  do |f| %>
+  <%= f.hidden_field :community_id, value: $current_community.id %>
+<%= f.text_field :duedate, data: { :provide => 'datepicker' }, class: "form-control form-date", :onchange => 'javascript:  $(this.form).submit();' %>
+    <% end %>
+        <td>
+<%= form_for assignment, :remote => true, :authenticity_token => true, :html => { :'data-type' => 'json', :multipart => true}  do |f| %>
+  <%= f.hidden_field :community_id, value: $current_community.id %>
+<%= f.select :user_id, @users.collect { |u| [ u.first_name.to_s+" "+u.last_name.to_s, u.id ] }, {}, :onchange => 'javascript:  $(this.form).submit();'  %>
+<% end %>
+</td>
+        <td><%= assignment.close_date %>
+          <% if assignment.close_date.nil? then %><%= link_to t('Close'), :action => 'close', id: assignment %><% end %>
+        </td>
+        <td><%= assignment.comment %></td>
+        <td><a href="#">Update</a></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

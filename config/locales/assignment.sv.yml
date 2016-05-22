@@ -1,0 +1,21 @@
+sv:
+  activerecord:
+    models:
+      assignment:
+        one: "Uppgift"
+        other: "Uppgifter"
+    attributes:
+      assignment:
+        no: "Nr"
+        reference: "Referens"
+        text: "Text"
+        status: "Status"
+        duedate: "Slutdatum"
+        user: "Användare"
+        close_date: "Avslutad"
+        comment: "Kommentar"
+  Open assignments: "Öppna uppgifter"
+  Latest updates: "Senaste uppdateringar"
+  Closed assignments: "Avslutade uppgifter"
+  New assignment: "Ny uppgift"
+

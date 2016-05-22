@@ -1,0 +1,11 @@
+sv:
+  activerecord:
+    models:
+      assignment_status:
+        one: "Status"
+        other: "Statusar"
+    attributes:
+      assignment_update:
+        status: "Status"
+        Order key: "Sorteringsnyckel"
+        closed: "Stängd"

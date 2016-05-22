@@ -1,0 +1,15 @@
+<%= simple_form_for(@assignment_update) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.select :assignment_id, @assignments.collect { |a| [ a.no.to_s+" "+a.text, a.id] }%>
+  </div>
+
+  <div class="form-inputs">
+    <%= f.input :update_text %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

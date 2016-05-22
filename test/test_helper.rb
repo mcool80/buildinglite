@@ -15,6 +15,9 @@ class ActionController::TestCase
 
   setup do
     sign_in users(:one)
+    @login_admin = users(:two)
+    @login_user = users(:one)
+    @login_other_admin = users(:five)
   end
 end
 
@@ -23,15 +26,18 @@ class ActionDispatch::IntegrationTest
   include Capybara::DSL
   def wait_for_ajax
     Timeout.timeout(Capybara.default_max_wait_time) do
-      loop until finished_all_ajax_requests?
+      finished_all_ajax_requests?
     end
   end
   def finished_all_ajax_requests?
-    page.evaluate_script('jQuery.active').zero?
+    loop do
+      active = page.evaluate_script('jQuery.active')
+      break if active == 0
+    end
   end
 
   def teardown
-    Capybara.reset_sessions!
-    Capybara.use_default_driver
+#    Capybara.reset_sessions!
+#    Capybara.use_default_driver
   end
 end

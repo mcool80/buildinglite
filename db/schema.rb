@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130195907) do
+ActiveRecord::Schema.define(version: 20160507203615) do
 
   create_table "apartments", force: :cascade do |t|
     t.text     "address",      limit: 65535
@@ -23,6 +23,44 @@ ActiveRecord::Schema.define(version: 20160130195907) do
   end
 
   add_index "apartments", ["community_id"], name: "index_apartments_on_community_id", using: :btree
+
+  create_table "assignment_statuses", force: :cascade do |t|
+    t.string   "status",       limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "community_id", limit: 4
+    t.boolean  "close_state",  limit: 1
+    t.integer  "order_key",    limit: 4
+  end
+
+  add_index "assignment_statuses", ["community_id"], name: "index_assignment_statuses_on_community_id", using: :btree
+
+  create_table "assignment_updates", force: :cascade do |t|
+    t.text     "update_text",   limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "assignment_id", limit: 4
+  end
+
+  add_index "assignment_updates", ["assignment_id"], name: "index_assignment_updates_on_assignment_id", using: :btree
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "no",                   limit: 4
+    t.string   "reference",            limit: 255
+    t.string   "text",                 limit: 255
+    t.integer  "assignment_status_id", limit: 4
+    t.date     "duedate"
+    t.integer  "user_id",              limit: 4
+    t.string   "comment",              limit: 255
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "community_id",         limit: 4
+    t.date     "close_date"
+  end
+
+  add_index "assignments", ["assignment_status_id"], name: "index_assignments_on_assignment_status_id", using: :btree
+  add_index "assignments", ["community_id"], name: "index_assignments_on_community_id", using: :btree
+  add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
 
   create_table "communities", force: :cascade do |t|
     t.text     "name",        limit: 65535
@@ -89,11 +127,16 @@ ActiveRecord::Schema.define(version: 20160130195907) do
     t.datetime "updated_at",                                       null: false
     t.string   "phone",                  limit: 255
     t.string   "mobile",                 limit: 255
+    t.string   "password",               limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "assignment_statuses", "communities"
+  add_foreign_key "assignment_updates", "assignments"
+  add_foreign_key "assignments", "assignment_statuses"
+  add_foreign_key "assignments", "users"
   add_foreign_key "fee_rates", "fees"
   add_foreign_key "fee_transactions", "apartments"
   add_foreign_key "fee_transactions", "fees"

@@ -1,0 +1,49 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  'no': 1
+  reference: Ref2
+  text: An assignment 2
+  assignment_status_id: 1
+  duedate: 2016-01-02
+  close_date: 
+  user_id: 2
+  comment: This is a comment
+  community_id: 1
+
+two:
+  id: 2
+  'no': 2
+  reference: Ref1
+  text: A very important assignment
+  assignment_status_id: 2
+  duedate: 2016-01-02
+  close_date: 2016-05-05
+  user_id: 1
+  comment: MyString
+  community_id: 1
+
+three:
+  id: 3
+  'no': 3
+  reference: Ref1
+  text: A very important assignment
+  assignment_status_id: 1
+  duedate: 2016-02-02
+  close_date: 
+  user_id: 1
+  comment: MyString
+  community_id: 1
+
+four:
+  id: 4
+  'no': 1
+  reference: Ref1
+  text: A very important assignment
+  assignment_status_id: 3
+  duedate: 2016-01-02
+  close_date: 
+  user_id: 5
+  comment: MyString
+  community_id: 2

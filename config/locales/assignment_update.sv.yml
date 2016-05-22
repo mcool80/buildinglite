@@ -1,0 +1,10 @@
+sv:
+  activerecord:
+    models:
+      assignment_update:
+        one: "Uppdatering"
+        other: "Uppdateringar"
+    attributes:
+      assignment_update:
+        updated_at: "Uppdaterad"
+        update_text: "Uppdatering"
