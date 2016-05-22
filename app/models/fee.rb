@@ -5,7 +5,10 @@ class Fee < ActiveRecord::Base
   enum fee_type_value: {no_user_input: 0, user_input: 1}
 
   def get_sum(start_date, end_date, apartment_id, type)
-    payment = FeeTransaction.where(fee_id: self[:id], apartment_id: apartment_id, transaction_type: type).where('start_date <= ?', start_date).order(start_date: :desc).limit(1)
+    payment = FeeTransaction.where(fee_id: self[:id], apartment_id: apartment_id, transaction_type: type).where('start_date <= ?', start_date)
+    if payment.empty? then
+      return 0
+    end
     date_pointer = start_date
     payment_value = 0
     while date_pointer < end_date do

@@ -17,7 +17,11 @@ module FeePageHelper
     end_date, end_input = f.get_fee_value(end_date, apartment_id, 'input')
     payments = f.get_sum(start_date, end_date, apartment_id, 'payment')
 
-    debt = payments - ( (end_input-start_input) * variable_fee.to_i + flat_fee.to_i)
+    if not (start_date.nil? && end_date.nil?) then
+      debt = payments - ( (end_input-start_input) * variable_fee.to_i + flat_fee.to_i)
+    else
+      debt = nil 
+    end
 
     return { "start_date" => start_date, "end_date" => end_date, "start_input" => start_input, "end_input" => end_input, "payment" => payments, "result" => debt }
   end
