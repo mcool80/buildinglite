@@ -1,0 +1,11 @@
+<% if params[:start_date] != nil
+%><%= Apartment.human_attribute_name("address") %>;<%= t("Date") %>;<%= t(params[:transaction_type]) %>
+<% @apartments.order(:address).each do |ap| 
+   found_transaction = ap.find_fee_transaction(@fee, params[:start_date], params[:transaction_type]) 
+   value = ""
+   value = found_transaction.value if not found_transaction.nil? and found_transaction.start_date == Date.parse(params[:start_date])
+   
+%>"<%= ap.address %>";<%= params[:start_date] %>;<%= value %>
+<%
+end
+end%>

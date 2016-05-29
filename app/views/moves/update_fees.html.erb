@@ -6,8 +6,9 @@
                    <p><%= t("Fee transaction added") %></p>
                 <% end %>
 		<h4><%= f.name %></h4>
-		<%= t('Montly') %> <% (date, value) = f.get_fee_value(DateTime.now, @apartment.id, 'payment') %>
-                <%= value %> (<%= date %>)<br>
+		<% payment_transaction = @apartment.find_fee_transaction(f, DateTime.now,'payment') %>
+		<%= t('Montly') %> 
+                <%= payment_transaction.value if not payment_transaction.nil? %> (<%= payment_transaction.start_date if not payment_transaction.nil? %>)<br>
         <div id "fee-<%=f.id %>-form"> 
 	<%= form_for @fee_transaction, url: { :action => "add_input" } do |ft| %>
 		<%= ft.hidden_field :fee_id, :value => f.id %>

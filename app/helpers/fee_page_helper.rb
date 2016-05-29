@@ -7,31 +7,24 @@ module FeePageHelper
     ap = Apartment.find(apartment_id)
 
     start_date = Date.parse(start_date_str)
-    if ap.moved != nil and start_date < ap.moved 
-       start_date = ap.moved
-    end
     end_date = Date.parse(end_date_str)
 
-    f = Fee.find(fee_id)
-    start_date, start_input = f.get_fee_value(start_date, apartment_id, 'input')
-    end_date, end_input = f.get_fee_value(end_date, apartment_id, 'input')
-    payments = f.get_sum(start_date, end_date, apartment_id, 'payment')
+    start_date = ap.moved if ap.moved and start_date < ap.moved 
+    start_date = end_date if start_date > end_date
 
-    if not (start_date.nil? && end_date.nil?) then
-      debt = payments - ( (end_input-start_input) * variable_fee.to_i + flat_fee.to_i)
+    f = Fee.find(fee_id)
+
+    start_fee_transaction = ap.find_fee_transaction(f, start_date, 'input')
+    end_fee_transaction = ap.find_fee_transaction(f, end_date, 'input')
+
+    if (not start_fee_transaction.nil?) and (not end_fee_transaction.nil?) then
+      payments = f.get_sum(start_fee_transaction.start_date, end_fee_transaction.start_date, apartment_id, 'payment')
+      debt = payments - ( (end_fee_transaction.value-start_fee_transaction.value) * variable_fee.to_i + flat_fee.to_i)
     else
+      payments = 0
       debt = nil 
     end
 
-    return { "start_date" => start_date, "end_date" => end_date, "start_input" => start_input, "end_input" => end_input, "payment" => payments, "result" => debt }
-  end
-  def check_result_ok(start_date, end_date, start_input, end_input, payment, result)
-    if ( start_date == end_date )
-      return false
-    end
-    if result > payment 
-      return false
-    end
-    return true
+    return { "start_fee_transaction" => start_fee_transaction, "end_fee_transaction" => end_fee_transaction, "payment" => payments, "result" => debt }
   end
 end

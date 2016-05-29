@@ -59,6 +59,21 @@ class FeePageController < ApplicationController
       i += 1
     end
   end
+  def fee_report
+    fee_id = params[:id]
+    @fee = Fee.find(fee_id)
+    authorize @fee
+
+    community = current_user.community
+    @apartments = Apartment.where(:community_id => community.id)
+    respond_to do |format|
+      format.html
+      format.csv do
+        response.headers['Content-Disposition'] = "attachment; filename=\"export.csv\""
+        response.headers['Content-Type'] ||= 'text/csv'
+      end
+    end
+  end
 private
 
   def fee_transaction_params

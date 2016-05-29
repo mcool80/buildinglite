@@ -18,12 +18,4 @@ class Fee < ActiveRecord::Base
     end
     return payment_value
   end
-
-  def get_fee_value(date, apartment_id, type)
-     last_input = FeeTransaction.where(apartment_id: apartment_id, transaction_type: type, fee_id: self[:id]).where('start_date <= ?', date).order(start_date: :desc)
-     if last_input.first == nil then
-       return nil, nil
-     end
-     return last_input.first.start_date, last_input.first.value
-  end
 end

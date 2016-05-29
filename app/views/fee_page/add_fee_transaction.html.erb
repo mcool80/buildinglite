@@ -1,4 +1,6 @@
-  <h3><%= t("Select apartment") %></h3>
+<%= render('links') %>  
+<h2><%= t('Add input') %> - <%= @fee.name %></h2>
+<h3><%= t("Select apartment") %></h3>
   <%= form_for @apartment, url: { :controller => 'fee_page', :action => 'add_fee_transaction' }, :method => 'get' do |f| %>
     <%= t("Address") %><br>
     <%= f.select :id, @apartments.map{ |a| [a.address, a.id] }, {}, { :onchange => "this.form.submit();" } %>

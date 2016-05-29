@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'fee_page/:id' => 'fee_page#index'
   post 'fee_page/add' 
   get 'fee_page/check_fee/:id' => 'fee_page#check_fee' 
+  get 'fee_page/fee_report/:id' => 'fee_page#fee_report' 
   get 'fee_page/administrate/:id' => 'fee_page#administrate' 
   get 'fee_page/add_fee_transaction/:id' => 'fee_page#add_fee_transaction' 
   post 'fee_page/save_result'

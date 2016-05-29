@@ -1,21 +1,22 @@
-<h2><%= t(@fee.name) %></h2>
+<%= render('links') %>
+<h2><%= t('Calculate debt') %> - <%= @fee.name %></h2>
 <% i = 0 %>
 <%= form_tag({}, {:method => 'get'}) do %>
    <table class="table">
      <thead>
        <tr>
-       <th><%= label_tag(:start_date, t("Start date")) %></th>
-       <th><%= label_tag(:end_date, t("End date")) %></th>
+       <th><%= label_tag(:start_date, FeeTransaction.human_attribute_name("start_date")) %></th>
+       <th><%= label_tag(:end_date, FeeTransaction.human_attribute_name("end_date")) %></th>
        <th><%= label_tag(:fixed_rate, t("Fixed rate")) %></th>
        <th><%= label_tag(:variable_rate, t("Variable rate")) %></th>
        </tr>
      </thead>
      <tbody>
        <tr>
-       <td><%= text_field_tag(:start_date) %></td>
-       <td><%= text_field_tag(:end_date) %></td>
-       <td><%= text_field_tag(:fixed_rate) %></td>
-       <td><%= text_field_tag(:variable_rate) %></td>
+       <td><%= text_field_tag(:start_date, params[:start_date]) %></td>
+       <td><%= text_field_tag(:end_date, params[:end_date]) %></td>
+       <td><%= text_field_tag(:fixed_rate, params[:fixed_rate]) %></td>
+       <td><%= text_field_tag(:variable_rate, params[:variable_rate]) %></td>
        <td><%= submit_tag(t("Calculate")) %></td>
        </tr>
      </tbody>
@@ -24,7 +25,7 @@
 <% if params[:start_date] != nil %> 
 <%= form_tag("/fee_page/save_result", :method => "post") do %>
 
-  <%= text_field_tag(:result_date) %>
+  <%= t("Date") %>: <%= text_field_tag(:result_date) %>
   <%= text_field_tag(:transaction_type, "debt") %>
   <%= submit_tag(t("Save result")) %>
 <table class="table">
@@ -41,14 +42,15 @@
     <%= hidden_field_tag(:fee_id, @fee.id) %>
 <% for ap in @apartments %>
     <% value_list = apartment_debt(params[:start_date], params[:end_date], @fee.id, ap.id, params[:fixed_rate], params[:variable_rate]) %>
-    <% result_ok = check_result_ok(value_list['start_date'], value_list['end_date'], value_list['start_input'], value_list['end_input'], value_list['payment'], value_list['payment'])  %>
-    <tr class="<% if not result_ok %>bg-danger <% end %>">
+    <% data_problem = value_list['start_fee_transaction'] == value_list['end_fee_transaction'] or value_list['start_fee_transaction'].nil? or value_list['start_fee_transaction'].nil? %>
+    <tr class="<% if data_problem %>bg-danger <% end %>">
       <%= hidden_field_tag("apartment_id[]", ap.id) %>
       <td><%= link_to(ap.address, controller: "apartments", action: "edit", id: ap.id )  %></td>
-      <td><%= value_list['start_date'] %></td>
-      <td><%= value_list['end_date'] %></td>
-      <td><%= value_list['start_input'] %></td>
-      <td><%= value_list['end_input'] %></td>
+
+      <td><%= value_list['start_fee_transaction'].start_date if not value_list['start_fee_transaction'].nil? %></td>
+      <td><%= value_list['end_fee_transaction'].start_date if not value_list['end_fee_transaction'].nil? %></td>
+      <td><%= value_list['start_fee_transaction'].value if not value_list['start_fee_transaction'].nil? %></td>
+      <td><%= value_list['end_fee_transaction'].value if not value_list['end_fee_transaction'].nil? %></td>
       <td><%= value_list['payment'] %></td>
       <td><%= text_field_tag("result[]", value_list['result']) %></td>
     </tr>

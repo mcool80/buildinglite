@@ -1,0 +1,42 @@
+<%= render('links') %>
+<h2><%= t('Fee report') %> - <%= @fee.name %></h2>
+<% i = 0 %>
+<%= form_tag({}, {:method => 'get'}) do %>
+   <table class="table">
+     <thead>
+       <tr>
+       <th><%= label_tag(:start_date, t("Date")) %></th>
+       <th><%= label_tag(:transaction_type, FeeTransaction.human_attribute_name("transaction_type")) %></th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+       <td><%= text_field_tag(:start_date, params[:start_date]) %></td>
+       <td><%= select_tag :transaction_type, options_for_select([[t("input"), "input"], [t("debt"), "debt"], [t("payment"), "payment"]], selected: params[:transaction_type]) %>
+       <td><%= submit_tag(t("Show report")) %></td>
+       </tr>
+     </tbody>
+    </table>
+<% end %>
+<% if params[:start_date] != nil %>
+<p><%= link_to t('Export to file'), current_url(:format => 'csv') %></p>
+<table class="table">
+  <thead>
+    <th><%= Apartment.human_attribute_name("address") %></th>
+    <th><%= t("Date") %></th>
+    <th><%= t(params[:transaction_type]) %></th>
+  </thead>
+<% @apartments.order(:address).each do |ap| %>
+    <% fee_transaction = ap.find_fee_transaction(@fee, params[:start_date], params[:transaction_type]) %>
+    <% value = "" %>
+    <% value = fee_transaction.value if not fee_transaction.nil? and fee_transaction.start_date ==  Date.parse(params[:start_date]) %>
+    <tr class="<%= "bg_danger" if value == "" %>">
+      <td><%= link_to(ap.address, controller: "apartments", action: "show", id: ap.id )  %></td>
+      <td><%= params[:start_date] %></td>
+      <td><%= value %></td>
+    </tr>
+<% end %>
+<% end %>
+  </tbody>
+</table>
+
