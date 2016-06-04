@@ -19,9 +19,9 @@
     <tr>
       <td><%= @assignment.no %></td>
       <td><%= @assignment.reference %></td>
-      <td><%= @assignment.status %></td>
+      <td><%= @assignment.assignment_status.status if @assignment.assignment_status %></td>
       <td><%= @assignment.duedate %></td>
-      <td><%= @assignment.user_first_name %> <%= @assignment.user_last_name %></td>
+      <td><%= @assignment.user.first_name if @assignment.user %> <%= @assignment.user.last_name if @assignment.user %></td>
       <td><%= @assignment.close_date %></td>
       <td><%= @assignment.comment %></td>
       <td><%= link_to t("Edit"), edit_assignment_path(@assignment) %></td>
@@ -51,7 +51,7 @@
 <div id="update-list" class="clearfix">
     <div class="row">
       <div class="col-md-6 col-xs-12">
-        <h2><%= t('Updates') %></h2>
+        <h2><%= AssignmentUpdate.model_name.human(:count => 2) %></h2>
         <table class="table">
           <thead>
             <tr>
@@ -61,7 +61,7 @@
             </tr>
           </thead>
           <tbody>
-        <% @assignment_updates.order(updated_at: :desc).each do |au| %>
+        <% @assignment.assignment_updates.order(updated_at: :desc).each do |au| %>
             <tr>
               <td><%= localize(au.updated_at, :format => t('date.formats.default') ) %></td>
               <td><%= simple_format(au.update_text) %></td>

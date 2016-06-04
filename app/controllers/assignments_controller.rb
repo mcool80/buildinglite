@@ -6,7 +6,6 @@ class AssignmentsController < ApplicationController
   # GET /assignments.json
   def index
     @assignments = $current_community.assignments.where(:close_date => nil).joins(:assignment_status) 
-    @users = $current_community.users
     authorize Assignment
   end
 
@@ -14,7 +13,6 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1.json
   def show
     authorize @assignment
-    @assignment_updates = AssignmentUpdate.where(assignment_id: @assignment.id)
     @assignment_update = AssignmentUpdate.new
   end
 
@@ -22,17 +20,13 @@ class AssignmentsController < ApplicationController
   def new
     @assignment = Assignment.new
     @assignment.community_id = $current_community.id
-    @users = $current_community.users
-    last_assignment =  Assignment.where(:community_id => $current_community.id).order(no: :desc).first
-    if not last_assignment.nil? then
-      @assignment.no = last_assignment.no + 1
-    end
+    @assignment.no = @assignment.new_no($current_community)
+
     authorize @assignment
   end
 
   # GET /assignments/1/edit
   def edit
-    @users = $current_community.users
     authorize @assignment
   end
 
@@ -44,7 +38,7 @@ class AssignmentsController < ApplicationController
 
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
+        format.html { redirect_to @assignment, notice: t(:success, :model => Assignment.model_name.human) }
         format.json { render :show, status: :created, location: @assignment }
       else
         format.html { render :new }
@@ -62,7 +56,7 @@ class AssignmentsController < ApplicationController
     end
     respond_to do |format|
       if @assignment.update(assignment_params)
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully updated.' }
+        format.html { redirect_to @assignment, notice: t(:updated, :model => Assignment.model_name.human) }
         format.json { render :show, status: :ok, location: @assignment }
       else
         format.html { render :edit }
@@ -77,7 +71,7 @@ class AssignmentsController < ApplicationController
     authorize @assignment
     @assignment.destroy
     respond_to do |format|
-      format.html { redirect_to assignments_url, notice: 'Assignment was successfully destroyed.' }
+      format.html { redirect_to assignments_path, notice: t(:destroyed, :model => Assignment.model_name.human) }
       format.json { head :no_content }
     end
   end
@@ -93,10 +87,10 @@ class AssignmentsController < ApplicationController
     end
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to assignments_url, notice: 'Assignment was successfully closed.' }
+        format.html { redirect_to @assignment, notice: t(:assignment_closed) }
         format.json { render :show, status: :ok, location: @assignment }
       else
-        format.html { redirect_to assignments_url, notice: 'Assignment was not closed.' }
+        format.html { redirect_to @assignment, notice: t(:assignment_not_closed) }
         format.json { render json: @assignment.errors, status: :unprocessable_entity }
       end
     end
@@ -104,7 +98,6 @@ class AssignmentsController < ApplicationController
 
   def closed_list
     @assignments = $current_community.assignments.where.not(:close_date => nil).joins(:assignment_status)
-    @users = $current_community.users
     authorize Assignment
   end
 

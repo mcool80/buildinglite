@@ -1,5 +1,5 @@
 class AssignmentUpdatesController < ApplicationController
-  before_action :set_globals
+  before_action :authenticate_user!, :set_globals
   before_action :set_assignment_update, only: [:show, :edit, :update, :destroy]
   before_action :set_assignments, only: [:edit, :new]
 
@@ -35,7 +35,7 @@ class AssignmentUpdatesController < ApplicationController
 
     respond_to do |format|
       if @assignment_update.save
-        format.html { redirect_to @assignment_update, notice: 'Assignment update was successfully created.' }
+        format.html { redirect_to @assignment_update, notice: t(:success, :model => AssignmentUpdate.model_name.human) }
         format.json { render :show, status: :created, location: @assignment_update }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class AssignmentUpdatesController < ApplicationController
     authorize @assignment_update 
     respond_to do |format|
       if @assignment_update.update(assignment_update_params)
-        format.html { redirect_to @assignment_update, notice: 'Assignment update was successfully updated.' }
+        format.html { redirect_to @assignment_update, notice: t(:updated, :model => AssignmentUpdate.model_name.human) }
         format.json { render :show, status: :ok, location: @assignment_update }
       else
         format.html { render :edit }
@@ -65,7 +65,7 @@ class AssignmentUpdatesController < ApplicationController
     authorize @assignment_update 
     @assignment_update.destroy
     respond_to do |format|
-      format.html { redirect_to assignment_updates_url, notice: 'Assignment update was successfully destroyed.' }
+      format.html { redirect_to assignment_updates_url, notice: t(:destroyed, :model => AssignmentUpdate.model_name.human) }
       format.json { head :no_content }
       format.js
     end

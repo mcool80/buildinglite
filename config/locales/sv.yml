@@ -69,3 +69,8 @@ sv:
   Forgot your password?: "Glömt ditt lösenord?"
   New assignment: "Skapa uppgift"
   Close: "Stäng"
+  success: "%{model} skapades utan problem."
+  failed: "%{model} skapades inte."
+  updated: "%{model} uppdaterades."
+  destroyed: "%{model} borttagen."
+  printdate: "Utskriftsdatum"

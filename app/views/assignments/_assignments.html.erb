@@ -18,7 +18,14 @@
       <tr>
         <td><%= link_to assignment.no, assignment_path(assignment) %></td>
         <td><%= assignment.reference %></td>
-        <td><%= link_to assignment.text, assignment_path(assignment) %></td>
+	<td>
+<%= form_for assignment, :remote => true, :authenticity_token => true, :html => { :'data-type' => 'json', :multipart => true}  do |f| %>
+  <%= f.hidden_field :community_id, value: $current_community.id %>
+        <%= f.text_field :text, :onchange => 'javascript:  $(this.form).submit();' do %>
+	  <%= f.input assignment.text, {}, :onchange => 'javascript:  $(this.form).submit();' %>
+	<% end %>
+    <% end %>
+	</td>
         <td>
 <%= form_for assignment, :remote => true, :authenticity_token => true, :html => { :'data-type' => 'json', :multipart => true}  do |f| %>
   <%= f.hidden_field :community_id, value: $current_community.id %>
@@ -33,7 +40,7 @@
         <td>
 <%= form_for assignment, :remote => true, :authenticity_token => true, :html => { :'data-type' => 'json', :multipart => true}  do |f| %>
   <%= f.hidden_field :community_id, value: $current_community.id %>
-<%= f.select :user_id, @users.collect { |u| [ u.first_name.to_s+" "+u.last_name.to_s, u.id ] }, {}, :onchange => 'javascript:  $(this.form).submit();'  %>
+<%= f.select :user_id, $current_community.users.collect { |u| [ u.first_name.to_s+" "+u.last_name.to_s, u.id ] }, {}, :onchange => 'javascript:  $(this.form).submit();'  %>
 <% end %>
 </td>
         <td><%= assignment.close_date %>

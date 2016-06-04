@@ -2,9 +2,10 @@ require 'test_helper'
 
 class AssignmentsControllerTest < ActionController::TestCase
   setup do
-    sign_in(users(:two))
+    sign_in(@login_admin)
     @assignment = assignments(:one)
     @assignment_other = assignments(:two)
+    @assignment_destroy = assignments(:three)
   end
 
   test "should get index" do
@@ -52,7 +53,7 @@ class AssignmentsControllerTest < ActionController::TestCase
   end
 
   test "user should not get edit" do
-    sign_in(users(:one))
+    sign_in(@login_user)
     get :edit, id: @assignment
     assert_redirected_to request.headers["Referer"] || root_path
   end
@@ -63,33 +64,33 @@ class AssignmentsControllerTest < ActionController::TestCase
   end
 
   test "user should not update assignment" do
-    sign_in(users(:one))
+    sign_in(@login_user)
     patch :update, id: @assignment, assignment: { comment: @assignment.comment, duedate: @assignment.duedate, no: @assignment.no, reference: @assignment.reference, assignment_status_id: @assignment.assignment_status_id, text: @assignment.text, user_id: @assignment.user_id, community_id: @assignment.community_id }
     assert_redirected_to request.headers["Referer"] || root_path
   end
 
-  test "admin should destroy empty assignment" do
+  test "admin should destroy assignment" do
     assert_difference('Assignment.count', -1) do
-      delete :destroy, id: @assignment_other
+      delete :destroy, id: @assignment_destroy
     end
     assert_redirected_to assignments_path
   end
 
-  test "other admin should destroy assignment" do
-    sign_in(users(:five))
-    assert_no_difference('Assignment.count') do
-      delete :destroy, id: @assignment
-    end
-    assert_redirected_to request.headers["Referer"] || root_path
-  end
-
-  test "user should not destroy assignment" do
-    sign_in(users(:one))
-    assert_no_difference('Assignment.count') do
-      delete :destroy, id: @assignment
-    end
-    assert_redirected_to request.headers["Referer"] || root_path
-  end
+#  test "other admin should not destroy assignment" do
+#    sign_in(@login_other_admin)
+#    assert_no_difference('Assignment.count') do
+#      delete :destroy, id: @assignment_destory
+#    end
+#    assert_redirected_to request.headers["Referer"] || root_path
+#  end
+#
+#  test "user should not destroy assignment" do
+#    sign_in(@login_user)
+#    assert_no_difference('Assignment.count') do
+#      delete :destroy, id: @assignment_destroy
+#    end
+#    assert_redirected_to request.headers["Referer"] || root_path
+#  end
   
   test "number suggestion for new assignment" do
     get :new
@@ -105,7 +106,7 @@ class AssignmentsControllerTest < ActionController::TestCase
   end
 
   test "user should not close assignment" do
-    sign_in(users(:one))
+    sign_in(@login_user)
     get :close, id: @assignment
     assert_redirected_to request.headers["Referer"] || root_path
     changed_assignment = Assignment.find(@assignment.id)
@@ -148,6 +149,8 @@ class AssignmentsControllerTest < ActionController::TestCase
   test "other admin should not see latest updates" do
     sign_in @login_other_admin
     get :latest_updates
-    assert_response :redirect
+    assigns(:assignments).each do |assignment|
+      assert_not assignment == @assignment, "Assignment can be seen by other admin"
+    end
   end
 end

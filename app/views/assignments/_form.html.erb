@@ -22,7 +22,7 @@
       <%= f.text_field :duedate, data: { :provide => 'datepicker' }, class: "form-control" %>
     <% end %>
     <%= f.input User.model_name.human do %>
-      <%= f.select :user_id, @users.collect { |u| [ u.first_name.to_s+" "+u.last_name.to_s, u.id ] } %>
+      <%= f.select :user_id, $current_community.users.collect { |u| [ u.first_name.to_s+" "+u.last_name.to_s, u.id ] } %>
     <% end %>
     <%= f.input :comment do %>
       <%= f.text_field :comment, class: "form-control" %>

@@ -65,13 +65,16 @@ class AdminInputTest < ActionDispatch::IntegrationTest
       end
       wait_for_ajax 
     end
+    find('footer')
   end
 
   test "admin destroy value in list" do
     get_admin_page @fee_transaction.fee, @apartment
+    find('footer')
     # Click all destroy links
     click_links while find_all(:link, 'Destroy').size > 0
     get_admin_page @fee_transaction.fee, @apartment
+    find('footer')
     # only header left
     assert_equal 1, page.all('#fee-table tr').size
   end

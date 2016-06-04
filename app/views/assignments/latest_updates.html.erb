@@ -1,5 +1,5 @@
 <%= render('links') %>
-
+<div class="printout">
 <table class="table">
   <thead>
     <tr>
@@ -24,4 +24,5 @@
     <% end %>
   </tbody>
 </table>
-
+<p><i><%= t('printdate') %>: <%= localize(Time.now, :format => t('time.formats.default')) %></i></p>
+</div>

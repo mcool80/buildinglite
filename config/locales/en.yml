@@ -69,3 +69,9 @@ en:
   Forgot your password?: "Forgot your password?"
   New assignment: "New assignment"
   Close: "Stäng"
+  success: "%{model} was successfully created."
+  failed: "%{model} could not be created."
+  updated: "%{model} was successfully updated."
+  destroyed: "%{model} was successfully destroyed."
+  printdate: "Printout date"
+
