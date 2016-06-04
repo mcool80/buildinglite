@@ -1,0 +1,22 @@
+en:
+  activerecord:
+    models:
+      assignment:
+        one: "Assignment"
+        other: "Assignments"
+    attributes:
+      assignment:
+        no: "No"
+        reference: "Reference"
+        text: "Text"
+        status: "Status"
+        duedate: "Duedate"
+        user: "User"
+        close_date: "Closed date"
+        comment: "Comment"
+  Open assignments: "Open assignments"
+  Latest updates: "Latest updates"
+  Closed assignments: "Closed assignments"
+  New assignment: "New asssignment"
+  Add update: "Add update"
+

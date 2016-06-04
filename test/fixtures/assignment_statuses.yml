@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  status: New 
+  close_state: false 
+  community_id: 1
+
+two:
+  id: 2
+  status: Closed
+  close_state: true
+  community_id: 1
+
+three:
+  id: 3
+  status: Great
+  close_state: false 
+  community_id: 2
+
+four:
+  id: 4
+  status: Not so great
+  close_state: true
+  community_id: 2
+
+five:
+  id: 5
+  status: To be deleted
+  close_state: false
+  community_id: 1

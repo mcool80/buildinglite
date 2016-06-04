@@ -31,6 +31,7 @@ td
   border-bottom: thin solid #000
 
 #topmenu
+  height: 15px
   ul
     padding: 0
     li
@@ -40,6 +41,7 @@ td
 #main
   padding-left: $padding-global
   padding-right: $padding-global
+  margin-top: 15px
 
 .checkbox
   margin-left: 25px
@@ -51,3 +53,26 @@ footer
 .error
   input
     border-color: #f00
+
+form
+  label
+    width: 100%
+    margin-top: 5px
+
+.form-actions
+  margin-top: 10px
+
+.form-date
+  width: 120px
+
+@media print
+  header
+    display: none
+  .menu 
+    display: none
+  footer
+    display: none
+
+  .printout
+    display: block 
+

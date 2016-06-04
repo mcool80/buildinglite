@@ -30,13 +30,13 @@ class ApplicationController < ActionController::Base
            $current_apartment = Apartment.where(:id => params[:apartment_id], :community_id => current_user.community.id).first
         end
         if not $current_apartment.nil? and not $current_apartment.community.nil? then
-          $current_community = Community.find($current_apartment.community_id)
+          $current_community = $current_apartment.community
         end
       end
-      if $current_community == nil then
+      if $current_community.nil? then
         $current_community = Community.new
       end
-      if $current_apartment == nil then
+      if $current_apartment.nil? then
         $current_apartment = Apartment.new
       end
     end

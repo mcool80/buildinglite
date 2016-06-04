@@ -1,0 +1,48 @@
+    <h2><%= t("Available services") %></h2>
+    <ul>
+      <% for fee_item in @fees %>
+        <li><%= link_to fee_item.name, controller: "fee_page", action: "index", id: fee_item %></li>
+      <% end %>
+      <li><%= link_to t("Apartment information"), controller: "apartments", action: "showinfo", id: current_user.apartment_id %></li>
+      <li><%= link_to t('Edit profile'), edit_user_registration_path %> </li>
+    </ul>
+    </div>
+
+
+    <% if current_user.admin? %>
+    <div id="administrator-services">
+      <h2><%= t("Administration") %></h2>
+        <div class="col-lg-3 col-md-4 col-xs-12">
+	<h3><%= t("Registry") %></h3>
+	<ul>
+	<li>Fees</li>
+        <li><%= link_to Apartment.model_name.human(count: 2), controller: "apartments", action: "index" %></li>
+        <li><%= link_to User.model_name.human(count: 2), controller: "users", action: "index" %></li>
+	</ul>
+	</div>
+        <div class="col-lg-3 col-md-4 col-xs-12">
+	<h3><%= t("Economics") %></h3>
+	<ul>
+        <li>Maintainance plan</li>
+        <li>Long term economics</li>
+        <li>Reports</li>
+	</ul>
+	</div>
+        <div class="col-lg-3 col-md-4 col-xs-12">
+	<h3>Management</h3>
+	<ul>
+        <li>Connect user</li>
+	<li><%= link_to  Assignment.model_name.human(count: 2), assignments_path %>
+        <li><%= link_to t("Add movement"), controller: "moves", action: "select_apartment" %></li>
+        <li>Maintanaince activitys</li>
+	</ul>
+	</div>
+        <div class="col-lg-3 col-md-4 col-xs-12">
+	<h3><%= Fee.model_name.human(count: 2) %></h3>
+	<ul>
+        <% for fee_item in @fees %>
+          <li><%= link_to fee_item.name, controller: "fee_page", action: "administrate", id: fee_item %></li>
+        <% end %>
+	</ul>
+        </div>
+      <% end %>

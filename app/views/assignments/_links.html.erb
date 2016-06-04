@@ -1,0 +1,7 @@
+<div class="menu">
+<%= link_to t('Open assignments'), assignments_path %> |
+<%= link_to t('New assignment'), new_assignment_path %> |
+<%= link_to t('Latest updates'), {controller: 'assignments', action: 'latest_updates' } %> |
+<%= link_to t('Closed assignments'), { controller: 'assignments', action: 'closed_list' } %> |
+<%= link_to AssignmentStatus.model_name.human(:count => 2), assignment_statuses_path %>
+</div>

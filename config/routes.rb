@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'static#index'
 
   # Fee pages
@@ -34,6 +35,16 @@ Rails.application.routes.draw do
   resources :apartments
 
   resources :communities
+
+  # Assignments
+  get 'assignments/latest_updates' => 'assignments#latest_updates'
+  resources :assignments
+  get 'assignments/close/:id' => 'assignments#close'
+  get 'assignments/list/closed' => 'assignments#closed_list'
+
+  resources :assignment_statuses
+
+  resources :assignment_updates
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

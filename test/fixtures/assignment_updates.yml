@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  assignment_id: 1
+  update_text: Update text 1
+  updated_at: 2016-01-01
+
+two:
+  id: 2
+  assignment_id: 1
+  update_text: Update text 2
+  updated_at: 2016-02-01
+
+three:
+  id: 3
+  assignment_id: 3
+  update_text: Update text 1
+  updated_at: 2016-01-01
+
+four:
+  id: 4
+  assignment_id: 3
+  update_text: Update text 2
+  updated_at: 2016-03-01
+
+five:
+  id: 5
+  assignment_id: 4
+  update_text: Update text 1
+  updated_at: 2016-02-01
+
+six:
+  id: 6
+  assignment_id: 4
+  update_text: Update text 2
+  updated_at: 2016-03-01

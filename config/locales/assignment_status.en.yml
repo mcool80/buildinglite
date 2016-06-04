@@ -1,0 +1,11 @@
+en:
+  activerecord:
+    models:
+      assignment_status:
+        one: "Status"
+        other: "Statuses"
+    attribute:
+      assignment_update:
+        status: "Status"
+        Order key: "Order key"
+        closed: "Closed"

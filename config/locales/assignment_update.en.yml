@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      assignment_update:
+        one: "Update"
+        other: "Updates"
+    attributes:
+      assignment_update:
+        updated_at: "Updated at"
+        update_text: "Update"

@@ -1,0 +1,28 @@
+<%= render('links') %>
+<div class="printout">
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Assignment.human_attribute_name("no") %></th>
+      <th><%= Assignment.human_attribute_name("text") %></th>
+      <th><%= AssignmentUpdate.human_attribute_name("updated_at") %></th>
+      <th><%= AssignmentUpdate.human_attribute_name("update_text") %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.each do |assignment| %>
+      <tr>
+        <td><%= assignment.no %></td>
+        <td><%= assignment.text %></td>
+        <% assignment_update = assignment.assignment_updates.order(updated_at: :desc).first %>
+        <td><% if not assignment_update.nil? then %><%= localize(assignment_update.updated_at, :format => t('date.formats.default') ) %><% end %></td>
+        <td><% if not assignment_update.nil? then %><%= simple_format(assignment_update.update_text) %><% end %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p><i><%= t('printdate') %>: <%= localize(Time.now, :format => t('time.formats.default')) %></i></p>
+</div>

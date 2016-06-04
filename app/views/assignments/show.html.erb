@@ -1,0 +1,73 @@
+<%= render('links') %>
+
+<div id="assignment-header">
+<h1><%= @assignment.text %></h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Assignment.human_attribute_name("no") %></th>
+      <th><%= Assignment.human_attribute_name("reference") %></th>
+      <th><%= Assignment.human_attribute_name("status") %></th>
+      <th><%= Assignment.human_attribute_name("duedate") %></th>
+      <th><%= Assignment.human_attribute_name("user") %></th>
+      <th><%= Assignment.human_attribute_name("close_date") %></th>
+      <th><%= Assignment.human_attribute_name("comment") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @assignment.no %></td>
+      <td><%= @assignment.reference %></td>
+      <td><%= @assignment.assignment_status.status if @assignment.assignment_status %></td>
+      <td><%= @assignment.duedate %></td>
+      <td><%= @assignment.user.first_name if @assignment.user %> <%= @assignment.user.last_name if @assignment.user %></td>
+      <td><%= @assignment.close_date %></td>
+      <td><%= @assignment.comment %></td>
+      <td><%= link_to t("Edit"), edit_assignment_path(@assignment) %></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div id="add-update">
+  <h3><%= t("Add update") %></h3>
+  <%= form_for @assignment_update, remote: true, :html => { :'data-type' => 'json', :multipart => true} do |f| %>
+    <%= f.hidden_field :assignment_id, :value => @assignment.id %>
+    <div class="row">
+      <div class="col-md-5 col-xs-12">
+        <span class="input-header"><%= t("Update text") %></span><br>
+        <%= f.text_area :update_text, class: "form-control", :required => true  %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5 col-xs-12">
+        <%= f.submit t("Save"), class: "btn btn-default pull-right" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div id="update-list" class="clearfix">
+    <div class="row">
+      <div class="col-md-6 col-xs-12">
+        <h2><%= AssignmentUpdate.model_name.human(:count => 2) %></h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><%= AssignmentUpdate.human_attribute_name("updated_at") %></th>
+              <th><%= AssignmentUpdate.human_attribute_name("update_text") %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+        <% @assignment.assignment_updates.order(updated_at: :desc).each do |au| %>
+            <tr>
+              <td><%= localize(au.updated_at, :format => t('date.formats.default') ) %></td>
+              <td><%= simple_format(au.update_text) %></td>
+              <td><%= link_to t('Destroy'), au, method: :delete, data: { confirm: t('Are you sure?') }, :remote => true, :class => '' %></td>
+            </tr>  
+        <% end %>
+          </tbody>
+        </table>
+</div>

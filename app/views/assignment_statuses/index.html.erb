@@ -1,0 +1,29 @@
+<%= render('links') %>
+
+<h1>Listing Assignment Statuses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Close state</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignment_statuses.each do |assignment_status| %>
+      <tr>
+        <td><%= assignment_status.status %></td>
+        <td><%= assignment_status.close_state %></td>
+        <td><%= link_to 'Show', assignment_status %></td>
+        <td><%= link_to 'Edit', edit_assignment_status_path(assignment_status) %></td>
+        <td><%= link_to 'Destroy', assignment_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Assignment status', new_assignment_status_path %>
