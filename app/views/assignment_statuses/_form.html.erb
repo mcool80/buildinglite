@@ -2,12 +2,16 @@
   <%= f.error_notification %>
   <%= f.hidden_field :community_id, value: $current_community.id %>
   <div class="form-inputs">
-    <%= f.input :status %>
-    <%= f.input :order_key %>
-    <%= f.check_box :close_state %>
+    <%= f.input AssignmentStatus.human_attribute_name('status') do %>
+      <%= f.text_field :status %>
+    <% end %>
+    <%= f.input AssignmentStatus.human_attribute_name('order_key') do %>
+      <%= f.text_field :order_key %>
+    <% end %>
+    <%= f.check_box :close_state %> <%= AssignmentStatus.human_attribute_name('close_state') %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, t('Save') %>
   </div>
 <% end %>

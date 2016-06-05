@@ -5,8 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Status</th>
-      <th>Close state</th>
+      <th><%= AssignmentStatus.human_attribute_name('status') %></th>
+      <th><%= AssignmentStatus.human_attribute_name('order_key') %></th>
+      <th><%= AssignmentStatus.human_attribute_name('close_state') %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,10 +16,11 @@
     <% @assignment_statuses.each do |assignment_status| %>
       <tr>
         <td><%= assignment_status.status %></td>
-        <td><%= assignment_status.close_state %></td>
-        <td><%= link_to 'Show', assignment_status %></td>
-        <td><%= link_to 'Edit', edit_assignment_status_path(assignment_status) %></td>
-        <td><%= link_to 'Destroy', assignment_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= assignment_status.order_key %></td>
+        <td><%= 'X' if assignment_status.close_state %></td>
+        <td><%= link_to t('Show'), assignment_status %></td>
+        <td><%= link_to t('Edit'), edit_assignment_status_path(assignment_status) %></td>
+        <td><%= link_to t('Destroy'), assignment_status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Assignment status', new_assignment_status_path %>
+<%= link_to t('New Assignment status'), new_assignment_status_path %>

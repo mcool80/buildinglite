@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   # Assignments
   get 'assignments/latest_updates' => 'assignments#latest_updates'
+  get 'assignments/show_assignments' => 'assignments#show_assignments'
   resources :assignments
   get 'assignments/close/:id' => 'assignments#close'
   get 'assignments/list/closed' => 'assignments#closed_list'

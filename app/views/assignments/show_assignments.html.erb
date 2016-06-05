@@ -1,0 +1,36 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Assignment.human_attribute_name("no") %></th>
+      <th><%= Assignment.human_attribute_name("reference") %></th>
+      <th><%= Assignment.human_attribute_name("text") %></th>
+      <th><%= Assignment.human_attribute_name("status") %></th>
+      <th><%= Assignment.human_attribute_name("duedate") %></th>
+      <th><%= Assignment.human_attribute_name("user") %></th>
+      <th><%= Assignment.human_attribute_name("comment") %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assignments.order('assignment_statuses.order_key').each do |assignment| %>
+      <tr>
+        <td><%= assignment.no %></td>
+        <td><%= assignment.reference %></td>
+	<td><%= assignment.text %></td>
+        <td><%= assignment.assignment_status.status if not assignment.assignment_status.nil? %></td>
+        <td><%= assignment.duedate %></td>
+        <td><% if assignment.user.nil? then %>
+              <%= t('No user') %>
+            <% else %>
+              <%= assignment.user.first_name %> <%= assignment.user.last_name %> 
+            <% end %>
+        </td>
+        <td><%= assignment.comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+   window.print();
+</script>

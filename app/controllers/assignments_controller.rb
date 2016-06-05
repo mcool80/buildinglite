@@ -105,6 +105,11 @@ class AssignmentsController < ApplicationController
     @assignments = $current_community.assignments.where(:close_date => nil)
     authorize Assignment
   end
+  
+  def show_assignments
+    @assignments = $current_community.assignments.where(:close_date => nil).joins(:assignment_status) 
+    authorize Assignment
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

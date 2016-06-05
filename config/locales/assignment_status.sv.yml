@@ -5,7 +5,7 @@ sv:
         one: "Status"
         other: "Statusar"
     attributes:
-      assignment_update:
+      assignment_status:
         status: "Status"
-        Order key: "Sorteringsnyckel"
-        closed: "Stängd"
+        order_key: "Sorteringsnyckel"
+        close_state: "Stängt ärende"

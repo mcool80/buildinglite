@@ -18,10 +18,10 @@
       <tr>
         <td><%= link_to assignment.no, assignment_path(assignment) %></td>
         <td><%= assignment.reference %></td>
-	<td>
+	<td class="col-lg-4 col-md-4 col-sm-4">
 <%= form_for assignment, :remote => true, :authenticity_token => true, :html => { :'data-type' => 'json', :multipart => true}  do |f| %>
   <%= f.hidden_field :community_id, value: $current_community.id %>
-        <%= f.text_field :text, :onchange => 'javascript:  $(this.form).submit();' do %>
+        <%= f.text_area :text, :onchange => 'javascript:  $(this.form).submit();', :class => 'form-assignment-text' do %>
 	  <%= f.input assignment.text, {}, :onchange => 'javascript:  $(this.form).submit();' %>
 	<% end %>
     <% end %>
@@ -29,7 +29,7 @@
         <td>
 <%= form_for assignment, :remote => true, :authenticity_token => true, :html => { :'data-type' => 'json', :multipart => true}  do |f| %>
   <%= f.hidden_field :community_id, value: $current_community.id %>
-    <%= f.select :assignment_status_id, AssignmentStatus.where(:community_id => $current_community.id).collect { |as| [ as.status, as.id ] }, {}, :onchange => 'javascript:  $(this.form).submit();' %>
+    <%= f.select :assignment_status_id, AssignmentStatus.where(:community_id => $current_community.id).collect { |as| [ as.status, as.id ] }, {:include_blank => t('Not assigned')}, :onchange => 'javascript:  $(this.form).submit();' %>
     <% end %>
         </td>
         <td>
@@ -40,7 +40,7 @@
         <td>
 <%= form_for assignment, :remote => true, :authenticity_token => true, :html => { :'data-type' => 'json', :multipart => true}  do |f| %>
   <%= f.hidden_field :community_id, value: $current_community.id %>
-<%= f.select :user_id, $current_community.users.collect { |u| [ u.first_name.to_s+" "+u.last_name.to_s, u.id ] }, {}, :onchange => 'javascript:  $(this.form).submit();'  %>
+<%= f.select :user_id, $current_community.users.where.not(:first_name => nil).order(:first_name, :last_name).collect { |u| [ u.first_name.to_s+" "+u.last_name.to_s, u.id ] }, {:include_blank => t('Not assigned') }, :onchange => 'javascript:  $(this.form).submit();'  %>
 <% end %>
 </td>
         <td><%= assignment.close_date %>

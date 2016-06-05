@@ -7,5 +7,5 @@ en:
     attribute:
       assignment_update:
         status: "Status"
-        Order key: "Order key"
-        closed: "Closed"
+        order_key: "Order key"
+        close_state: "Close state"

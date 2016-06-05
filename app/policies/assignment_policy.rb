@@ -39,5 +39,9 @@ class AssignmentPolicy < ApplicationPolicy
   def latest_updates?
     user.admin?(:community => $current_community)
   end
+
+  def show_assignments?
+    user.admin?(:community => $current_community)
+  end
 end
 

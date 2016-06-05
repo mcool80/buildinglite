@@ -14,6 +14,12 @@ class AssignmentsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:assignments)
   end
 
+  test "should get show_assignments" do
+    get :show_assignments
+    assert_response :success
+    assert_not_nil assigns(:assignments)
+  end
+
   test "should get new" do
     get :new
     assert_response :success

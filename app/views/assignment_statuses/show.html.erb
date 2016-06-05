@@ -1,11 +1,15 @@
 <%= render('links') %>
 <p>
-  <strong>Status:</strong>
+  <strong><%= AssignmentStatus.human_attribute_name('status') %>:</strong>
   <%= @assignment_status.status %>
 </p>
 <p>
-  <strong>Close state:</strong>
+  <strong><%= AssignmentStatus.human_attribute_name('order_key') %></strong>
+  <%= @assignment_status.close_state %>
+</p>
+<p
+  <strong><%= AssignmentStatus.human_attribute_name('close_state') %>:</strong>
   <%= @assignment_status.close_state %>
 </p>
 
-<%= link_to 'Edit', edit_assignment_status_path(@assignment_status) %> |
+<%= link_to t('Edit'), edit_assignment_status_path(@assignment_status) %> |

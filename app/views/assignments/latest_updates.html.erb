@@ -7,7 +7,7 @@
       <th><%= Assignment.human_attribute_name("text") %></th>
       <th><%= AssignmentUpdate.human_attribute_name("updated_at") %></th>
       <th><%= AssignmentUpdate.human_attribute_name("update_text") %></th>
-      <th></th>
+      <th><%= AssignmentStatus.human_attribute_name("status") %></th>
     </tr>
   </thead>
 
@@ -19,6 +19,7 @@
         <% assignment_update = assignment.assignment_updates.order(updated_at: :desc).first %>
         <td><% if not assignment_update.nil? then %><%= localize(assignment_update.updated_at, :format => t('date.formats.default') ) %><% end %></td>
         <td><% if not assignment_update.nil? then %><%= simple_format(assignment_update.update_text) %><% end %></td>
+        <td><%= assignment.assignment_status.status if not assignment.assignment_status.nil? %></td>
         
       </tr>
     <% end %>
