@@ -102,7 +102,7 @@ class AssignmentsController < ApplicationController
   end
 
   def latest_updates
-    @assignments = $current_community.assignments.where(:close_date => nil)
+    @assignments = $current_community.assignments.where(:close_date => nil).joins(:assignment_status)
     authorize Assignment
   end
   

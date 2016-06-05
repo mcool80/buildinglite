@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% @assignments.each do |assignment| %>
+    <% @assignments.order('assignment_statuses.order_key').each do |assignment| %>
       <tr>
         <td><%= assignment.no %></td>
         <td><%= assignment.text %></td>
