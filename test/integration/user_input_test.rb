@@ -41,13 +41,12 @@ class UserInputTest < ActionDispatch::IntegrationTest
     before_count = page.all('#fee-table tr').size
     # click destroy on inputted value 
     # check that value is destroyed
-    print page.html
-#    dismiss_confirm(:wait => 60) do 
-#      find(:link, 'Destroy', match: :first).click
-#    end
-#    visit '/fee_page/'+@fee_transaction.fee.id.to_s+"?locale=en"
-#    find('footer')
-#    assert_equal before_count, page.all('#fee-table tr').size
+    dismiss_confirm(:wait => 60) do 
+      find(:link, 'Destroy', match: :first).click
+    end
+    visit '/fee_page/'+@fee_transaction.fee.id.to_s+"?locale=en"
+    find('footer')
+    assert_equal before_count, page.all('#fee-table tr').size
 
     page.accept_confirm do
       find(:link, 'Destroy', match: :first).click
