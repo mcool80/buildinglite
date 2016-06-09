@@ -53,4 +53,8 @@ class FeePolicy < ApplicationPolicy
   def fee_report?
     user.admin?(:community => record.community)
   end
+
+  def save_result?
+    user.admin?(:community => record.community)
+  end
 end

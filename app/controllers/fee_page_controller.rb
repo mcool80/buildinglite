@@ -42,7 +42,8 @@ class FeePageController < ApplicationController
   end
   
   def save_result
-    fee_id = params[:fee_id]
+    fee = Fee.find(params[:fee_id])
+    authorize fee
     transaction_type = params[:transaction_type]
     result_date = params[:result_date]
     apartment_ids = params[:apartment_id]
@@ -50,13 +51,18 @@ class FeePageController < ApplicationController
     i = 0
     while i < apartment_ids.count do
       ft = FeeTransaction.new
-      ft.fee_id = fee_id
+      ft.fee_id = fee.id
       ft.start_date = result_date
       ft.apartment_id = apartment_ids[i]
       ft.transaction_type = transaction_type
       ft.value = results[i]
-      ft.save
+      if not ft.value.nil? then
+        ft.save
+      end
       i += 1
+    end
+    respond_to do |format|
+      format.html { redirect_to :action => 'fee_report',  :id => fee, :start_date => result_date, :transaction_type => transaction_type, notice: t('saved_result') }
     end
   end
   def fee_report
