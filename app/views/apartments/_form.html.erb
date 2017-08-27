@@ -19,6 +19,10 @@
     <%= f.label :apartment_no %><br>
     <%= f.text_area :apartment_no %>
   </div>
+  <div class="field">
+    <%= f.label :moved %><br>
+    <%= f.text_area :moved %>
+  </div>
   <%= f.hidden_field :community_id, value: current_user.community.id %>
   <div class="actions">
     <%= f.submit %>
